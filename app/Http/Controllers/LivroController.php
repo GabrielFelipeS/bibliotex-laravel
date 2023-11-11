@@ -12,14 +12,15 @@ class LivroController extends Controller
      *  @param post $request : Informações para cadastrar um livro
      * @return null : redireciona para uma página
      */
-    function store(Request $request) {
+    public function store(Request $request) {
         $livro = new Livro;
         
         $livro->ISBN = $request->ISBN;
         $livro->valor = $request->valor;
         $livro->nome = $request->nome;
         $livro->descricao = $request->descricao;
-
+        $livro->nomeDaFoto = $request->nomeDaFoto;
+        
         $livro->save();
 
         return redirect('/');
