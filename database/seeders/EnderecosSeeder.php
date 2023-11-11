@@ -6,7 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Endereco;
 
-class EnderecoSeeder extends Seeder
+class EnderecosSeeder extends Seeder
 {
     /**
      * Run the database seeds.

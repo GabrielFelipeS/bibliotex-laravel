@@ -20,9 +20,6 @@ return new class extends Migration
             $table->foreign('codVendedor')->references('codigo_vendedor')->on('vendedores');
             $table->double('valor');
             $table->string('cartao', 19);
-            
-           
-           
             $table->timestamps();
         });
     }
