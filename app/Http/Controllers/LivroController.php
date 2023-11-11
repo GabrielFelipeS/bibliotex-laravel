@@ -17,6 +17,10 @@ class LivroController extends Controller
         return $livro;
     }
 
+    /**
+     *  @param post $request : Informações para editar um livro
+     * @return null : redireciona para uma página
+     */
     public function update(Request $request) {
 
         DB::table('livros')
@@ -29,6 +33,8 @@ class LivroController extends Controller
                 'descricao' => $request->descricao,
                 'nomeDaFoto' => $request->nomeDaFoto,
             ]);
+
+        return redirect('/')->with('message', 'Livro editado com sucesso');
     }
 
 
