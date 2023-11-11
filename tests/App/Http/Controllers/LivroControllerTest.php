@@ -1,33 +1,42 @@
 <?php
 
 namespace Tests\App\Http\Controllers;
+use Illuminate\Http\Request;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-
+use App\Http\Controllers\LivroController;
+use App\Models\Livro;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class LivroControllerTest extends TestCase
 {
-    /**
-     * A basic unit test example.
-     */
+    public function test_find(): void {
+        $controller = new LivroController;
+        $livro = $controller->findLivro("001");
 
+         $this->assertEquals("O labirinto do fauno", $livro->nomeLivro);
+     }
 
     public function test_store(): void {
+        $quantidadeAntesDeInserir = Livro::count();
 
-        $response = Http::post('/cadastrarLivro', [
-            'ISBN' => '100',
-            'nomeLivro' => 'Teste Cadastrar',
-            'valorLivro' => 25.0,
-            'descricao' => 'Testando Cadastro',
-            'nomeDaFoto' => 'media/teste.jpg',
-        ]);
-       
-        
-       // $quantidade = Livro::count();
-        $this->assertTrue(true);
-        //$this->assertEquals(13, $quantidade);
+        $controller = new LivroController;
+        $requestData = [
+            'ISBN' => '1234567890', // Substitua pelos valores desejados
+            'valorLivro' => 19.99,
+            'nomeLivro' => 'titulo do livro',
+            'descricao' => 'Descrição do Livro',
+            'nomeDaFoto' => 'foto.jpg',
+        ];
+
+        $request = new Request($requestData);
+
+        $controller->store($request);
+
+        $quantidadeAtual = Livro::count();
+
+        $this->assertNotEquals($quantidadeAntesDeInserir, $quantidadeAtual);
     }
+
 }
