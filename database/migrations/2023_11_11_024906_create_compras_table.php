@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('compras', function (Blueprint $table) {
             $table->id();
+            $table->string('cpfComprador', 13);
+            $table->string('ISBNLivro', 15);
+            $table->integer('codVendedor');
+            $table->double('valor');
+            $table->string('cartao  ');
+
+            $table->foreign('ISBNLivro')->references('ISBN')->on('livros');
+            $table->foreign('codVendedor')->references('codigo_vendedor')->on('vendedores');
             $table->timestamps();
         });
     }
