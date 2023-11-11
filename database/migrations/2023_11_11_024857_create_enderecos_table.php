@@ -12,7 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('enderecos', function (Blueprint $table) {
-            $table->id();
+            $table->string('cpfDono');
+            $table->foreign('cpfDono')->references('cpf')->on('vendedores');
+            $table->string('bairro', 40);
+            $table->string('endereco', 40);
+            $table->string('cidade', 40);
+            $table->string('estado', 40);
+            $table->string('cep', 40);
+            $table->string('complemento', 40);
             $table->timestamps();
         });
     }
