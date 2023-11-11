@@ -39,4 +39,33 @@ class LivroControllerTest extends TestCase
         $this->assertNotEquals($quantidadeAntesDeInserir, $quantidadeAtual);
     }
 
+    public function test_update() {
+        $controller = new LivroController;
+
+        $requestData = [
+            'ISBN' => '2234567890', // Substitua pelos valores desejados
+            'valorLivro' => 19.99,
+            'nomeLivro' => 'titulo do livro apos dar update',
+            'descricao' => 'Descrição do Livro apos dar update',
+            'nomeDaFoto' => 'foto.jpg',
+            'ISBNLivroEditar' => '1234567890',
+        ];
+        
+        $request = new Request($requestData);
+
+        $controller->update($request);
+
+        $livroSendoBuscado = $controller->findLivro('2234567890');
+
+        $this->assertNotEmpty($livroSendoBuscado);
+    }
+
+    public function test_delete() {
+        $quantidadeAntesDeDeletar = Livro::count();
+        $controller = new LivroController;
+        $controller->delete('2234567890');
+
+        $quantidadeAtual = Livro::count();
+        $this->assertNotEquals($quantidadeAntesDeDeletar, $quantidadeAtual);
+    }
 }
