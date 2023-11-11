@@ -15,8 +15,8 @@ class LivroControllerTest extends TestCase
         $controller = new LivroController;
         $livro = $controller->find("001");
 
-         $this->assertEquals("O labirinto do fauno", $livro->nomeLivro);
-     }
+        $this->assertEquals("O labirinto do fauno", $livro->nomeLivro);
+    }
 
      public function test_findAll(): void {
         $controller = new LivroController;
