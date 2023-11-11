@@ -10,12 +10,23 @@ use Tests\TestCase;
 
 class EnderecoControllerTest extends TestCase
 {
+
+    public function test_delete() {
+        $quantidadeDeEnderecoAntesDeDeletar = Endereco::count();
+        $controller = new EnderecoController;
+        
+        $controller->delete('12465887');
+
+        $quantidadeDEnderecoAgora = Endereco::count();
+        $this->assertNotEquals($quantidadeDeEnderecoAntesDeDeletar, $quantidadeDEnderecoAgora);
+    }
+
     public function test_store() {
         $quantidadeDeEnderecoAntesDeInserir = Endereco::count();
 
         $controller = new EnderecoController;
         $requestData = [
-            'cpfDono' => '1234567891233',
+            'cpfDono' => '12465887',
             'bairro' => 'Jardim testado',
             'endereco' => 'rua testada',
             'cidade' => 'Testroide',
@@ -35,7 +46,7 @@ class EnderecoControllerTest extends TestCase
     public function test_find() {
         $controller = new EnderecoController; 
         $Endereco = $controller->find('12465887');
-        $this->assertEquals('Pimentas', $Endereco->bairro);
+        $this->assertEquals('Jardim testado', $Endereco->bairro);
     }
 
     public function test_findAll() {
@@ -50,7 +61,7 @@ class EnderecoControllerTest extends TestCase
         $controller = new EnderecoController;
         $requestData = [
             'cpf' => '12465887',
-            'cpfDono' => '1234567891233',
+            'cpfDono' => '12465887',
             'bairro' => 'testado',
             'endereco' => 'rua testada',
             'cidade' => 'Testroide',
@@ -62,18 +73,10 @@ class EnderecoControllerTest extends TestCase
         $request = new Request($requestData);
         $controller->update($request);
 
-        $endereco = $controller->find('1234567891233');
+        $endereco = $controller->find('12465887');
 
-        $this->assertEquals('Pimentas', $endereco->bairro);
+        $this->assertEquals('testado', $endereco->bairro);
     }
 
-    public function test_delete() {
-        $quantidadeDeEnderecoAntesDeDeletar = Endereco::count();
-        $controller = new EnderecoController;
-        
-        $controller->delete('1234567891233');
-
-        $quantidadeDEnderecoAgora = Endereco::count();
-        $this->assertNotEquals($quantidadeDeEnderecoAntesDeDeletar, $quantidadeDEnderecoAgora);
-    }
+   
 }
