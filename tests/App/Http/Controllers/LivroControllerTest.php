@@ -13,7 +13,7 @@ class LivroControllerTest extends TestCase
 {
     public function test_find(): void {
         $controller = new LivroController;
-        $livro = $controller->findLivro("001");
+        $livro = $controller->find("001");
 
          $this->assertEquals("O labirinto do fauno", $livro->nomeLivro);
      }
@@ -84,9 +84,8 @@ class LivroControllerTest extends TestCase
 
         $controller->update($request);
 
-        $livroSendoBuscado = $controller->findLivro('2234567890');
+        $livroSendoBuscado = $controller->find('2234567890');
 
-        $this->assertNotEmpty($livroSendoBuscado);
         $this->assertEquals('titulo do livro apos dar update', $livroSendoBuscado->nomeLivro);
     }
 

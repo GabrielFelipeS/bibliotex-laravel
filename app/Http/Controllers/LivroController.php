@@ -9,21 +9,21 @@ use App\Models\Livro;
 class LivroController extends Controller
 {
 
+      /**
+     *  @param $ISBN : Informarma o ISBN do livro
+     * @return $livro : retorna o livro encontrado
+     */
+    public function find($ISBN) {
+        $livro = Livro::where('ISBN', $ISBN)->first();
+        return $livro;
+    }
+
     /**
      * @return $livros : retorna os livros cadastrados no banco de dados
      */
     public function findAll() {
         $livros = Livro::all();
         return $livros;
-    }
-
-    /**
-     *  @param $ISBN : Informarma o ISBN do livro
-     * @return $livro : retorna o livro encontrado
-     */
-    public function findLivro($ISBN) {
-        $livro = Livro::where('ISBN', $ISBN)->first();
-        return $livro;
     }
 
     /**
