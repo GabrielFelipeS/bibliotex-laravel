@@ -16,10 +16,12 @@ class ComprasControllerTest extends TestCase
 
         $controller = new CompraController;
         $requestData = [
-            'cpf' => '49960658028',
-            'nomeCompleto' => 'Testador testando testavel',
-            'data_de_nascimento' => '2023/11/11',
-            'nacionalidade' => 'Testador',
+            'id' => 100,
+            'cpfComprador' => '1234567891233',
+            'ISBNLivro' => '001',
+            'codVendedor' => 1,
+            'valor' => 50,
+            'cartao' => '1234-5119',
         ];
 
         $request = new Request($requestData);
@@ -30,72 +32,46 @@ class ComprasControllerTest extends TestCase
         $this->assertNotEquals($quantidadeDeVendoresAntesDeInserir, $quantidadeDeVendoresAgora);
     }
 
-    public function test_store_ja_existente() {
-        $quantidadeDeVendoresAntesDeInserir = Compra::count();
-
-        $controller = new CompraController;
-        $requestData = [
-            'cpf' => '49960658028',
-            'nomeCompleto' => 'Testador testando testavel',
-            'data_de_nascimento' => '2023/11/11',
-            'nacionalidade' => 'Testador',
-        ];
-
-        $request = new Request($requestData);
-        $controller->store($request);
-
-        $quantidadeDeVendoresAgora = Compra::count();
-
-        $this->assertEquals($quantidadeDeVendoresAntesDeInserir, $quantidadeDeVendoresAgora);
-    }
-
     public function test_find() {
         $controller = new CompraController; 
-        $vendedor = $controller->find('49960658028');
-        $this->assertEquals('Testador testando testavel', $vendedor->nomeCompleto);
-    }
-
-    public function test_findByCodigoDoCompra() {
-        $controller = new CompraController; 
-        $vendedor = $controller->findByCodigoDoCompra(1);
-        $this->assertEquals('Gabriel Felipe', $vendedor->nomeCompleto);
+        $compra = $controller->find(1);
+        $this->assertEquals('1234567891233', $compra->cpfComprador);
     }
 
     public function test_findAll() {
         $quantidadeDeCompraes = Compra::count();
         $controller = new CompraController;
-        $vendedores = $controller->findAll();
+        $compraes = $controller->findAll();
 
-        $this->assertEquals($quantidadeDeCompraes, $vendedores->count());
+        $this->assertEquals($quantidadeDeCompraes, $compraes->count());
     }
 
     public function test_update() {
         $controller = new CompraController;
         $requestData = [
-            'codigo_vendedor' => 5,
-            'cpf' => '49960658028',
-            'nomeCompleto' => 'Testador testando testavel testado',
-            'data_de_nascimento' => '2023/11/11',
-            'nacionalidade' => 'Testador',
+            'id' => 100,
+            'cpfComprador' => '1234567891233',
+            'ISBNLivro' => '001',
+            'codVendedor' => 1,
+            'valor' => 50,
+            'cartao' => '1234-5119',
         ];
 
         $request = new Request($requestData);
         $controller->update($request);
 
-        $vendedor = $controller->find('49960658028');
+        $compra = $controller->find(100);
 
-        $this->assertEquals('Testador testando testavel testado', $vendedor->nomeCompleto);
+        $this->assertEquals('1234567891233', $compra->cpfComprador);
     }
 
     public function test_delete() {
         $quantidadeDeVendoresAntesDeDeletar = Compra::count();
         $controller = new CompraController;
         
-        $controller->delete('49960658028');
+        $controller->delete(100);
 
         $quantidadeDeVendoresAgora = Compra::count();
         $this->assertNotEquals($quantidadeDeVendoresAntesDeDeletar, $quantidadeDeVendoresAgora);
     }
-
-
 }
