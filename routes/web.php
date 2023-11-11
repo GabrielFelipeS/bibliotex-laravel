@@ -12,7 +12,12 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+use App\Http\Controllers\UsuarioController;
+Route::get('/', [EventController::class, 'index']);
+Route::get('/usuario/cadastrarUsuario', [UsuarioController::class, 'create']);
+Route::post('/usuario', [UsuarioController::class, 'store']);
 
-Route::get('/', function () {
+
+Route::get('/home', function () {
     return view('welcome');
 });

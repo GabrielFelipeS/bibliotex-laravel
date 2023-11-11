@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('telefone', 13);
             $table->string('email', 40);
             $table->string('senha', 100);
-            $table->string('fotoPerfil', 40);
+            $table->string('fotoPerfil', 40)->nullable();
             $table->timestamps();
         });
     }
