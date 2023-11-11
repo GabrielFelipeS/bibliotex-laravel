@@ -38,18 +38,20 @@ class UsuarioController extends Controller
     public function update(Request $request) {
         $usuarioExiste = Usuario::where('email', $request->emailDeUpdate)->first();
         if(!$usuarioExiste) {
-            return redirect('/')->with('message', 'Já existe um cadastro com esse email');
+            return redirect('/')->with('message', 'Não existe um cadastro com esse email');
         }
 
-        $usuario = new Usuario;
-        $usuario->nome = $request->nome;
-        $usuario->nascimento = $request->nascimento;
-        $usuario->telefone = $request->telefone;
-        $usuario->email = $request->email;
-        $usuario->senha = $request->senha;
-        $usuario->fotoPerfil = $request->fotoPerfil;
-
-        $usuario->save();
+        DB::table('usuarios')
+            ->where('email', $request->query('emailDeUpdate'))
+            ->limit(1)
+            ->update([
+                'nome' => $request->nome,
+                'nascimento' => $request->nascimento,
+                'telefone' => $request->telefone,
+                'email' => $request->email,
+                'senha' => $request->senha,
+                'fotoPerfil' => $request->fotoPerfil,
+            ]);
     }
 
     public function delete($email) {

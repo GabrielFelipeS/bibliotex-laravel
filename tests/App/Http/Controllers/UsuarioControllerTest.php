@@ -18,7 +18,7 @@ class UsuarioControllerTest extends TestCase
             'nome' => 'Testando',
             'nascimento' => '2023-04-14',
             'telefone' => '(11) 2484-515',
-            'email' => 'abacate@abacate.com',
+            'email' => 'teste@abacate.com',
             'senha' => '$2y$10$AL2JJvjD0dqPojG0B/jGGei8Rq851T0NhaMTSipXXsq8nFlYELBBa',
             'fotoPerfil' => 'fotosPerfil/Administrador.png',
         ];
@@ -31,11 +31,32 @@ class UsuarioControllerTest extends TestCase
         $this->assertNotEquals($quantidadeDeUsuarioAntesDeInserir, $quantidadeDeUsuariosAgora);
     }
 
+    public function test_store_ja_existe() {
+        $quantidadeDeUsuarioAntesDeInserir = Usuario::count();
+
+        $controller = new UsuarioController;
+        $requestData = [
+            'nome' => 'Testando',
+            'nascimento' => '2023-04-14',
+            'telefone' => '(11) 2484-515',
+            'email' => 'teste@abacate.com',
+            'senha' => '$2y$10$AL2JJvjD0dqPojG0B/jGGei8Rq851T0NhaMTSipXXsq8nFlYELBBa',
+            'fotoPerfil' => 'fotosPerfil/Administrador.png',
+        ];
+
+        $request = new Request($requestData);
+        $controller->store($request);
+
+        $quantidadeDeUsuariosAgora = Usuario::count();
+
+        $this->assertEquals($quantidadeDeUsuarioAntesDeInserir, $quantidadeDeUsuariosAgora);
+    }
+
     public function test_find() {
         $controller = new UsuarioController; 
-        $usuario = $controller->find('teste@teste.com');
+        $usuario = $controller->find('teste@abacate.com');
         //$this->assertNotEmpty($usuario);
-        $this->assertEquals('Teste Testando', $usuario->nome);
+        $this->assertEquals('Testando', $usuario->nome);
     }
 
     public function test_findAll() {
@@ -49,11 +70,11 @@ class UsuarioControllerTest extends TestCase
     public function test_update() {
         $controller = new UsuarioController;
         $requestData = [
-            'emailDeUpdate' => 'abacate@abacate.com',
+            'emailDeUpdate' => 'teste@abacate.com',
             'nome' => 'testavel',
             'nascimento' => '2023-04-14',
             'telefone' => '(11) 2484-515',
-            'email' => 'teste@abacate.com',
+            'email' => 'abacate@teste.com',
             'senha' => '$2y$10$AL2JJvjD0dqPojG0B/jGGei8Rq851T0NhaMTSipXXsq8nFlYELBBa',
             'fotoPerfil' => 'fotosPerfil/Administrador.png',
         ];
@@ -61,16 +82,36 @@ class UsuarioControllerTest extends TestCase
         $request = new Request($requestData);
         $controller->update($request);
 
-        $Usuario = $controller->find('teste@abacate.com');
+        $Usuario = $controller->find('abacate@teste.com');
         
         $this->assertEquals('testavel', $Usuario->nome);
+    }
+
+    public function test_update_email_nao_existe() {
+        $controller = new UsuarioController;
+        $requestData = [
+            'emailDeUpdate' => '1234@abacate.com',
+            'nome' => 'testavel',
+            'nascimento' => '2023-04-14',
+            'telefone' => '(11) 2484-515',
+            'email' => '1234@abacate.com',
+            'senha' => '$2y$10$AL2JJvjD0dqPojG0B/jGGei8Rq851T0NhaMTSipXXsq8nFlYELBBa',
+            'fotoPerfil' => 'fotosPerfil/Administrador.png',
+        ];
+
+        $request = new Request($requestData);
+        $controller->update($request);
+
+        $Usuario = $controller->find('1234@abacate.com');
+        
+        $this->assertEmpty($Usuario);
     }
 
     public function test_delete() {
         $quantidadeDeUsuarioAntesDeDeletar = Usuario::count();
         $controller = new UsuarioController;
         
-        $controller->delete('abacate@abacate.com');
+        $controller->delete('abacate@teste.com');
         
         $quantidadeDeUsuarioAgora = Usuario::count();
         $this->assertNotEquals($quantidadeDeUsuarioAntesDeDeletar, $quantidadeDeUsuarioAgora);

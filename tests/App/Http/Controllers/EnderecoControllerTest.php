@@ -43,6 +43,28 @@ class EnderecoControllerTest extends TestCase
         $this->assertNotEquals($quantidadeDeEnderecoAntesDeInserir, $quantidadeDeEnderecosAgora);
     }
 
+    public function test_store_ja_existe() {
+        $quantidadeDeEnderecoAntesDeInserir = Endereco::count();
+
+        $controller = new EnderecoController;
+        $requestData = [
+            'cpfDono' => '110000',
+            'bairro' => 'Jardim testado',
+            'endereco' => 'rua testada',
+            'cidade' => 'Testroide',
+            'estado' => 'São Testado',
+            'cep' => '01234-5678',
+            'complemento' => 'Dani Salgados',
+        ];
+
+        $request = new Request($requestData);
+        $controller->store($request);
+
+        $quantidadeDeEnderecosAgora = Endereco::count();
+
+        $this->assertEquals($quantidadeDeEnderecoAntesDeInserir, $quantidadeDeEnderecosAgora);
+    }
+
     public function test_find() {
         $controller = new EnderecoController; 
         $Endereco = $controller->find('12465887');
