@@ -18,6 +18,14 @@ class LivroControllerTest extends TestCase
          $this->assertEquals("O labirinto do fauno", $livro->nomeLivro);
      }
 
+     public function test_findAll(): void {
+        $controller = new LivroController;
+        $quantidadeDeLivrosCadastrados = Livro::count();
+        $livros = $controller->findAll();
+
+         $this->assertEquals($quantidadeDeLivrosCadastrados, $livros->count());
+     }
+
     public function test_store(): void {
         $quantidadeAntesDeInserir = Livro::count();
 
@@ -39,6 +47,27 @@ class LivroControllerTest extends TestCase
         $this->assertNotEquals($quantidadeAntesDeInserir, $quantidadeAtual);
     }
 
+    public function test_store_livro_ja_existe(): void {
+        $quantidadeAntesDeInserir = Livro::count();
+
+        $controller = new LivroController;
+        $requestData = [
+            'ISBN' => '1234567890', // Substitua pelos valores desejados
+            'valorLivro' => 19.99,
+            'nomeLivro' => 'titulo do livro',
+            'descricao' => 'Descrição do Livro',
+            'nomeDaFoto' => 'foto.jpg',
+        ];
+
+        $request = new Request($requestData);
+
+        $controller->store($request);
+
+        $quantidadeAtual = Livro::count();
+
+        $this->assertEquals($quantidadeAntesDeInserir, $quantidadeAtual);
+    }
+
     public function test_update() {
         $controller = new LivroController;
 
@@ -58,6 +87,7 @@ class LivroControllerTest extends TestCase
         $livroSendoBuscado = $controller->findLivro('2234567890');
 
         $this->assertNotEmpty($livroSendoBuscado);
+        $this->assertEquals('titulo do livro apos dar update', $livroSendoBuscado->nomeLivro);
     }
 
     public function test_delete() {

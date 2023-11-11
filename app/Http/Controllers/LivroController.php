@@ -8,6 +8,15 @@ use App\Models\Livro;
 
 class LivroController extends Controller
 {
+
+    /**
+     * @return $livros : retorna os livros cadastrados no banco de dados
+     */
+    public function findAll() {
+        $livros = Livro::all();
+        return $livros;
+    }
+
     /**
      *  @param $ISBN : Informarma o ISBN do livro
      * @return $livro : retorna o livro encontrado
@@ -43,18 +52,23 @@ class LivroController extends Controller
      * @return null : redireciona para uma página
      */
     public function store(Request $request) {
-        $livro = new Livro;
-        
-        $livro->ISBN = $request->ISBN;
-        $livro->valorLivro = $request->valorLivro;
-        $livro->nomeLivro = $request->nomeLivro;
-        $livro->descricao = $request->descricao;
-        $livro->nomeDaFoto = $request->nomeDaFoto;
-        
-        $livro->save();
+        $livroJaExiste = Livro::where('ISBN', $request->ISBN)->first();
 
-        //return response()->json(['message' => 'Livro criado com sucesso'], 201);
-        return redirect('/')->with('message', 'Livro criado com sucesso');
+        if(!$livroJaExiste) {
+            $livro = new Livro;
+            $livro->ISBN = $request->ISBN;
+            $livro->valorLivro = $request->valorLivro;
+            $livro->nomeLivro = $request->nomeLivro;
+            $livro->descricao = $request->descricao;
+            $livro->nomeDaFoto = $request->nomeDaFoto;
+            
+            $livro->save();
+            //return response()->json(['message' => 'Livro criado com sucesso'], 201);
+            return redirect('/')->with('message', 'Livro criado com sucesso');
+        } else {
+            return redirect('/')->with('message', 'Livro já existe');
+        }
+        
     }
 
     /**
