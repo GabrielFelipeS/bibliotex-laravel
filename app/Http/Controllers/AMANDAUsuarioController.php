@@ -10,7 +10,6 @@ class UsuarioController extends Controller
     public function index() {
         $usuario = Usuario::all();
         return view('welcome');
-
     }
 
     public function create(){
