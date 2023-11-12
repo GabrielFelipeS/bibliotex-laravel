@@ -9,7 +9,7 @@ use App\Models\Usuario;
 class UsuarioController extends Controller
 {
     public function index() {
-        $usuario = $this->findAll();
+        $usuarios = $this->findAll();
         return view('welcome');
     }
 

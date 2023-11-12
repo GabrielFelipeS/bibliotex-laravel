@@ -67,6 +67,13 @@ class UsuarioControllerTest extends TestCase
         $this->assertEquals($quantidadeDeUsuario, $Usuarios->count());
     }
 
+    /*public function teste_index() {
+        $response = $this->get('/');
+        $usuarios = $response->original['usuarios'];
+
+        $this->assertNotEmpty($usuarios);
+    }*/
+
     public function test_update() {
         $controller = new UsuarioController;
         $requestData = [

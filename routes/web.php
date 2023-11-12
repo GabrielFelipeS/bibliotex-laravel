@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 use App\Http\Controllers\UsuarioController;
-Route::get('/', [EventController::class, 'index']);
+Route::get('/', [UsuarioController::class, 'index']);
 Route::get('/usuario/cadastrarUsuario', [UsuarioController::class, 'create']);
 Route::post('/usuario', [UsuarioController::class, 'store']);
 
