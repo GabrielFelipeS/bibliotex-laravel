@@ -2,6 +2,11 @@
 <html lang="pt-br">
 <head>
   <title>@yield('title')</title>
+
+    @php
+        include '/inc/appearance/cabecalho.php'; 
+    @endphp
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -14,42 +19,15 @@
   <link rel="stylesheet" href="mdb/css/style.css">
 </head>
 <body>
-    <header>
-        <div class="header">
-            <div class="logo">
-                <div class="logoimg"><img src="/images/livro_icon.png" alt="icone livro"></div>
-            </div>
-            <div class="menu">
-                <img class="menu-opener" src="images/menu.png" onclick="clickMenu()"/>
-                <nav id="nav">
-                    <ul>
-                        <li class="active"><a href="/">Home</a></li>
-                        <li><a href="/projeto/index.php#Empresa">Empresa</a></li>
-                        <li><a href="/projeto/index.php#Servicos">Serviços</a></li>
-                        <li><a href="/projeto/index.php#Livros">Livros</a></li>
-                        <li><a href="/projeto/index.php#autor">Autores</a></li>
-                        <li><a href="/projeto/index.php#Clientes">Clientes</a></li>
-                        <li><a href="/projeto/index.php#Preco">Preço</a></li>
-                        <li><a href="/projeto/index.php#Detalhes">Detalhes</a></li>
-                        @auth
-                        <li><a href="/projeto/index.php#Sugestoes">Sugestoes</a></li>
-                        <li><a href="/sair">Sair</a></li>
-                        @endauth
-                        @guest
-                        <li><a href="/usuario/login">Login</a></li>
-                        <li><a href="/usuario/cadastrar">Cadastrar</a></li>
-                        @endguest
-                    </ul>
-                </nav>
-            </div>
-        </div>
-    </header>
+  @php 
+    include '/apperance/header.php'
+  @endphp
         
     <main> 
         @if(session('msg'))
             <p class="msg">{{ session('msg') }}</p>
         @endif
-        
+
         @yield('content')
     </main>    
 

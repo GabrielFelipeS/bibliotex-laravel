@@ -1,6 +1,8 @@
 <?php
-#include '../DAO/LivroDAO.php';
-#include '../DAO/VendedorDAO.php';
+namespace public\lib\mylib;
+
+use App\Models\Livro;
+use App\Models\Vendedor;
 /**
 * cria um slide
 *
@@ -203,9 +205,8 @@ function rfile($filename){
  */
 function carregarLivros() {
     $html = "";
-    GLOBAL $conn;
-    $livroDAO = new LivroDAO($conn);
-    $livros = $livroDAO->getAll();
+
+    $livros = Livro::all();
     
     foreach($livros as $livro) {               
         $html .= section_livros(carregarInformacoesDoLivro($livro));
@@ -231,9 +232,8 @@ function carregarInformacoesDoLivro($livro) {
 
 function carregarLivrosParaEditar() {
     $html = "";
-    GLOBAL $conn;
-    $livroDAO = new LivroDAO($conn);
-    $livros = $livroDAO->getAll();
+   
+    $livros = Livro::all();
     #$livros = getAll("livros");
     #var_dump($livros);
     $callback = '';
@@ -260,9 +260,7 @@ function opcoesEditarExcluir($livro) {
 
 function carregarfunc() {
     $html = "";
-    GLOBAL $conn;
-    $vendedorDAO = new VendedorDAO($conn);
-    $vendedores = $vendedorDAO->getAll();
+    $vendedores = Vendedor::All();
     #$vendedores = getAll("vendedor");
     foreach($vendedores as $vendedor) {               
         $html .= "<div class='space'> Codigo do vendedor: ".$vendedor['codigo_vendedor']."</br>".

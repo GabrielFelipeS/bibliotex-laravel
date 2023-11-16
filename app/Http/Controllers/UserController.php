@@ -12,7 +12,7 @@ class UserController extends Controller
 {
     public function index() {
         $usuarios = $this->findAll();
-        return view('welcome');
+        return view('index');
     }
 
     public function create(){
