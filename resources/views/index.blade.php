@@ -182,7 +182,7 @@
 
 
 
-    <?php if(isset($_SESSION['email'])):?>
+    @auth
         <?=  $mylib->abertura_light(['titulo' => 'Sugestões', 'descricao' => 'Deixe sua sugestão aqui', 'id' => 'Sugestoes'])?>
         
 
@@ -241,8 +241,7 @@
         </div>
         </div>
         </section>
-        
-        <?php endif; ?>
+        @endauth
 
         <section class="section-map" title="CONTATOS">
             <div class="section-map--area">
