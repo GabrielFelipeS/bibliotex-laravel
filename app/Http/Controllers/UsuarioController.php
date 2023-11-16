@@ -5,11 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Usuario;
+use Illuminate\Support\Facades\Auth;
 
 class UsuarioController extends Controller
 {
     public function index() {
         $usuarios = $this->findAll();
+        /*if(Auth::check()) {
+            $email = $request->input('email');
+            $senha = $request->input('senha');    
+        }*/
         return view('welcome');
     }
 
@@ -58,8 +63,11 @@ class UsuarioController extends Controller
             return redirect('/')->with('msg', 'E-mail ou senha inválidos');
         }
 
-        auth()->login($usuario);
-        return redirect()->route('/')->with('msg', 'Login realizado com sucesso');
+       // Auth::login($usuario);
+        if (Auth::attempt(['email' => $email, 'senha' => $senha])) {
+            return redirect('/')->with('msg', 'Login realizado com sucesso');
+        }
+        return redirect('/')->with('msg', 'Login não realizado com sucesso');
     }
 
     

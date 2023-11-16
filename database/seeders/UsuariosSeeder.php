@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Usuario; 
+use App\Models\User; 
 
 class UsuariosSeeder extends Seeder
 {
@@ -13,7 +13,7 @@ class UsuariosSeeder extends Seeder
      */
     public function run(): void
     {
-        Usuario::create([
+        User::create([
             'nome' => 'Administrador',
             'nascimento' => '2023-04-14',
             'telefone' => '(11) 2484-515',
@@ -23,7 +23,7 @@ class UsuariosSeeder extends Seeder
         ]);
         
         // Inserção 2
-        Usuario::create([
+        User::create([
             'nome' => 'Teste Testando',
             'nascimento' => '2023-04-14',
             'telefone' => '(11) 2484-515',
