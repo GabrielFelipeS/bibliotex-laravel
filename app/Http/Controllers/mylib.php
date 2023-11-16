@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Models\Livro;
 use App\Models\Vendedor;
 
@@ -306,5 +307,38 @@ class mylib extends Controller {
         if (isset($_SESSION['mensagem'])) {
             include '../inc/view/mostrarMensagem.php';   
         }
+    }
+
+    /**
+     * @param request | email para cadastrar no arquivo emails do /public/inc
+     */
+    function cadastrarEmail(Request $request) {
+        $email = $request->email; 
+    
+        $email_post = fopen('./inc/arquivo_temp', "w") or die("Você não tem permissão para gravar neste diretório!");
+        wline($email_post, $email);
+        fclose($email_post);
+    
+        $email_post = fopen('./inc/arquivo_temp', "r") or die("Você não tem permissão para gravar neste diretório!");
+        $post = fgets($email_post);
+        fclose($email_post);
+    
+        $myfile = fopen('./inc/emails', "r") or die("Você não tem permissão para gravar neste diretório!");
+    
+        while(!feof($myfile)){      
+            $email_arquivo = fgets($myfile);
+    
+            if (strcasecmp($email_arquivo, $post) == 0){  //Verifica se já não existe
+                fclose($myfile);
+                fclose($email_post);
+                return view('index');
+            }
+        }
+        fclose($myfile);
+    
+        $myfile = fopen('./inc/emails', "a") or die("Você não tem permissão para gravar neste diretório!");
+        wline($myfile, $email);
+        fclose($myfile);
+        return view('index');
     }
 }
