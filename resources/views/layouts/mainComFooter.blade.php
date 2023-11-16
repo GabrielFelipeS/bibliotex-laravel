@@ -47,7 +47,8 @@
         
     <main> 
         @if(session('msg'))
-            <p class="msg">{{ session('msg') }}</p>
+            <p class="msg" id="mensagem">{{ session('msg') }}</p>
+            <script id="script" src="./js/deletarMensagem.js"></script>
         @endif
         @yield('content')
     </main>    

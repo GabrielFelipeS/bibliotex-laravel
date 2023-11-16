@@ -54,7 +54,7 @@
                 <?= $mylib->carregarLivros()?>
 
             </div>
-            <a href="./inc/view/cadastrarExibirlivros.php" class="button">Mais livros</a>
+            <a href="/cadastrarExibirlivros" class="button">Mais livros</a>
         </div>
         </div>
         </section>

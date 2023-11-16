@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\LivroController;
 use App\Http\Controllers\mylib;
 
 Route::get('/', [UserController::class, 'index']);
@@ -34,4 +35,6 @@ Route::any('usuario/login', function () {
     return view('usuario/loginUsuario');
 })->middleware('guest');
 
+
+Route::get('/cadastrarExibirlivros', [LivroController::class, 'cadastraExibirLivros']);
 
