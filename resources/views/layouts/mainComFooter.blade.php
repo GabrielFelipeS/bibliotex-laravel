@@ -70,7 +70,7 @@
                     </p>
             </div>
             <div class="footer--item area3">
-                <form method="POST" action="/projeto/inc/controller/ProcessamentoCadastrar_email.php">
+                <form method="POST" action="/sugestors/CadastrarEmail">
                     <input type="email" name="email" placeholder="INSIRA UM EMAIL PARA SE CADASTRAR" required/>
                     <button class="button">Inscreva-se</button>
                 </form>

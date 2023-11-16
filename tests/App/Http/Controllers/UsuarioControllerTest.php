@@ -20,7 +20,7 @@ class UsuarioControllerTest extends TestCase
             'nascimento' => '2023-04-14',
             'telefone' => '(11) 2484-515',
             'email' => 'teste@abacate.com',
-            'password' => '$2y$10$AL2JJvjD0dqPojG0B/jGGei8Rq851T0NhaMTSipXXsq8nFlYELBBa',
+            'password' => '123456',
             'fotoPerfil' => 'fotosPerfil/Administrador.png',
         ];
 
@@ -41,7 +41,7 @@ class UsuarioControllerTest extends TestCase
             'nascimento' => '2023-04-14',
             'telefone' => '(11) 2484-515',
             'email' => 'teste@abacate.com',
-            'password' => '$2y$10$AL2JJvjD0dqPojG0B/jGGei8Rq851T0NhaMTSipXXsq8nFlYELBBa',
+            'password' => '123456',
             'fotoPerfil' => 'fotosPerfil/Administrador.png',
         ];
 
@@ -68,13 +68,6 @@ class UsuarioControllerTest extends TestCase
         $this->assertEquals($quantidadeDeUser, $Users->count());
     }
 
-    /*public function teste_index() {
-        $response = $this->get('/');
-        $usuarios = $response->original['usuarios'];
-
-        $this->assertNotEmpty($usuarios);
-    }*/
-
     public function test_update() {
         $controller = new UserController;
         $requestData = [
@@ -83,7 +76,7 @@ class UsuarioControllerTest extends TestCase
             'nascimento' => '2023-04-14',
             'telefone' => '(11) 2484-515',
             'email' => 'abacate@teste.com',
-            'password' => '$2y$10$AL2JJvjD0dqPojG0B/jGGei8Rq851T0NhaMTSipXXsq8nFlYELBBa',
+            'password' => '123456',
             'fotoPerfil' => 'fotosPerfil/Administrador.png',
         ];
 
@@ -103,7 +96,7 @@ class UsuarioControllerTest extends TestCase
             'nascimento' => '2023-04-14',
             'telefone' => '(11) 2484-515',
             'email' => '1234@abacate.com',
-            'password' => '$2y$10$AL2JJvjD0dqPojG0B/jGGei8Rq851T0NhaMTSipXXsq8nFlYELBBa',
+            'password' => '123456',
             'fotoPerfil' => 'fotosPerfil/Administrador.png',
         ];
 
@@ -119,7 +112,7 @@ class UsuarioControllerTest extends TestCase
         $controller = new UserController;
         $requestData = [
             'email' => 'abacate@teste.com',
-            'senha' => '123456',
+            'password' => '123456',
         ];
         $request = new Request($requestData);
         $controller->login($request);

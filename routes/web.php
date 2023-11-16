@@ -21,6 +21,7 @@ Route::get('/usuario/cadastrar', [UserController::class, 'create']);
 Route::post('/usuario', [UserController::class, 'store']);
 
 Route::post('/login', [UserController::class, 'login'])->name('login');
+Route::post('/sugestors/CadastrarEmail"', [mylib::class, 'cadastrarEmail']);
 Route::get('/sair', [UserController::class, 'sair'])->name('sair');
 
 Route::get('/login', function () {
