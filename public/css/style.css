@@ -872,6 +872,19 @@ CSS DE ÁREAS ESPECÍFICAS
 form .button:hover {
     font-weight: bold;
     text-decoration: underline;
+
+    
+}
+
+.msg {
+    background-color: #333;
+    color: #DDD ;
+    border: 1px solid #333;
+    width: 100%;
+    margin-bottom: 0;
+    text-align: center;
+    padding: 10px;
+
 }
 
 
@@ -1182,5 +1195,9 @@ form .button:hover {
     .footer-social {
         justify-content: center;
     }
+
+ 
 }
+
+
 

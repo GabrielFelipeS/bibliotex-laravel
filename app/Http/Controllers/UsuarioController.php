@@ -22,7 +22,7 @@ class UsuarioController extends Controller
         $usuarioExiste = Usuario::where('email', $request->email)->first();
         
         if($usuarioExiste) {
-            return redirect('/')->with('message', 'Já existe um cadastro com esse email');
+            return redirect('/')->with('msg', 'E-mail já cadastrado');
         }
 
         $usuario = new Usuario;
@@ -45,8 +45,24 @@ class UsuarioController extends Controller
         
         $usuario->save();
 
-        return redirect('/')->with('msg');
+        return redirect('/')->with('msg', 'Cadastro realizado');
     }
+
+    public function login(Request $request){        
+        $email = $request->input('email');
+        $senha = $request->input('senha');
+
+        $usuario = Usuario::where('email', $email)->first();
+
+        if(!$usuario || !password_verify($senha, $usuario->senha)){
+            return redirect('/')->with('msg', 'E-mail ou senha inválidos');
+        }
+
+        auth()->login($usuario);
+        return redirect()->route('/')->with('msg', 'Login realizado com sucesso');
+    }
+
+    
 
     public function find($email) {
         $usuario = Usuario::where('email', $email)->first();

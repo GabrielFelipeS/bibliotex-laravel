@@ -23,12 +23,7 @@
                 <img class="menu-opener" src="images/menu.png" onclick="clickMenu()"/>
                 <nav id="nav">
                     <ul>
-                    <li class="active"><a href="/home">Home</a></li>
-                <?php 
-                
-                ?> 
-                
-                                  
+                        <li class="active"><a href="/">Home</a></li>
                         <li><a href="/projeto/index.php#Empresa">Empresa</a></li>
                         <li><a href="/projeto/index.php#Servicos">Serviços</a></li>
                         <li><a href="/projeto/index.php#Livros">Livros</a></li>
@@ -36,10 +31,14 @@
                         <li><a href="/projeto/index.php#Clientes">Clientes</a></li>
                         <li><a href="/projeto/index.php#Preco">Preço</a></li>
                         <li><a href="/projeto/index.php#Detalhes">Detalhes</a></li>
+                        @auth
                         <li><a href="/projeto/index.php#Sugestoes">Sugestoes</a></li>
-                        <li><a href="/projeto/form_login.php">Login</a></li>
-                        <li><a href="/usuario/cadastrarUsuario">Cadastrar</a></li>
-
+                        <li><a href="/projeto/index.php#Sugestoes">Sair</a></li>
+                        @endauth
+                        @guest
+                        <li><a href="/usuario/login">Login</a></li>
+                        <li><a href="/usuario/cadastrar">Cadastrar</a></li>
+                        @endguest
                     </ul>
                 </nav>
             </div>
@@ -47,6 +46,9 @@
     </header>
         
     <main> 
+        @if(session('msg'))
+            <p class="msg">{{ session('msg') }}</p>
+        @endif
         @yield('content')
     </main>    
 
