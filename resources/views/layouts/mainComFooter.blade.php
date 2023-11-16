@@ -24,15 +24,15 @@
                 <nav id="nav">
                     <ul>
                         <li class="active"><a href="/">Home</a></li>
-                        <li><a href="/projeto/index.php#Empresa">Empresa</a></li>
-                        <li><a href="/projeto/index.php#Servicos">Serviços</a></li>
-                        <li><a href="/projeto/index.php#Livros">Livros</a></li>
-                        <li><a href="/projeto/index.php#autor">Autores</a></li>
-                        <li><a href="/projeto/index.php#Clientes">Clientes</a></li>
-                        <li><a href="/projeto/index.php#Preco">Preço</a></li>
-                        <li><a href="/projeto/index.php#Detalhes">Detalhes</a></li>
+                        <li><a href="/index.php#Empresa">Empresa</a></li>
+                        <li><a href="/index.php#Servicos">Serviços</a></li>
+                        <li><a href="/index.php#Livros">Livros</a></li>
+                        <li><a href="/index.php#autor">Autores</a></li>
+                        <li><a href="/index.php#Clientes">Clientes</a></li>
+                        <li><a href="/index.php#Preco">Preço</a></li>
+                        <li><a href="/index.php#Detalhes">Detalhes</a></li>
                         @auth
-                        <li><a href="/projeto/index.php#Sugestoes">Sugestoes</a></li>
+                        <li><a href="/index.php#Sugestoes">Sugestoes</a></li>
                         <li><a href="/sair">Sair</a></li>
                         @endauth
                         @guest
