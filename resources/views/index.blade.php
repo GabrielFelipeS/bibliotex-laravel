@@ -2,20 +2,21 @@
 
 @section('title', 'Blibiotex')
 
-@include_once('./lib/mylib.php'); 
-
-
 @section('content')
+
+<?php 
+    use App\Http\Controllers\mylib;
+    $mylib = new mylib
+?>
 
 <section class="banner">
             <div class="sliders">
-                
-                <?= slide_area(['titulo' => 'Melhores preços só na', 'titulo_colorido' => 'Bibliotex', 'subtitulo' => 'Ligue para: +00 0 1234 5678', 'botao' => 'Compre já!', 'button1' => 'actives buttonarea1', 'button2' => 'buttonarea1']) ?>
-                <?= slide_area(['titulo' => 'Garanta a oferta', 'titulo_colorido' => 'Compre seu o já', 'subtitulo' => 'Ligue para: +00 0 1234 5678', 'botao' => 'Compre já!', 'button1' => 'buttonarea2', 'button2' => 'actives buttonarea2']) ?>
+                <?=  $mylib->slide_area(['titulo' => 'Melhores preços só na', 'titulo_colorido' => 'Bibliotex', 'subtitulo' => 'Ligue para: +00 0 1234 5678', 'botao' => 'Compre já!', 'button1' => 'actives buttonarea1', 'button2' => 'buttonarea1']) ?>
+                <?= $mylib->slide_area(['titulo' => 'Garanta a oferta', 'titulo_colorido' => 'Compre seu o já', 'subtitulo' => 'Ligue para: +00 0 1234 5678', 'botao' => 'Compre já!', 'button1' => 'buttonarea2', 'button2' => 'actives buttonarea2']) ?>
             </div>
         </section>
 
-        <?= abertura_light(['titulo' => 'Sobre nós', 'descricao' => 'Quem somos?', 'id' => 'Empresa']) ?>
+        <?= $mylib->abertura_light(['titulo' => 'Sobre nós', 'descricao' => 'Quem somos?', 'id' => 'Empresa']) ?>
         <div class="section-aboutus">
             <div class="section-aboutus--left">
 
@@ -32,25 +33,25 @@
         </div>
         </section>
 
-        <?= abertura_dark(['titulo' => 'Serviços', 'descricao' => 'SERVIÇOS QUE PRESTAMOS', 'id' => 'Servicos']) ?>
+        <?= $mylib->abertura_dark(['titulo' => 'Serviços', 'descricao' => 'SERVIÇOS QUE PRESTAMOS', 'id' => 'Servicos']) ?>
         <div class="section-services">
-            <?= section_service(['imagem' => 'assets/images/medalha.png', 'titulo' => 'Alta qualidade', 'paragrafo' => 'Livros com qualidade altissimos']) ?>
+            <?= $mylib->section_service(['imagem' => 'assets/images/medalha.png', 'titulo' => 'Alta qualidade', 'paragrafo' => 'Livros com qualidade altissimos']) ?>
 
-            <?= section_service(['imagem' => 'assets/images/estrela.png', 'titulo' => 'Livros inesquecíveis', 'paragrafo' => 'Nem mesmo a maldição de Addie LaRue vai te fazer esquece-lós']) ?>
+            <?= $mylib->section_service(['imagem' => 'assets/images/estrela.png', 'titulo' => 'Livros inesquecíveis', 'paragrafo' => 'Nem mesmo a maldição de Addie LaRue vai te fazer esquece-lós']) ?>
 
-            <?= section_service(['imagem' => 'assets/images/relogio.png', 'titulo' => 'Entrega mais rápida do Olimpo', 'paragrafo' => 'Entrega feita o mais rápido que Hermes consegue']) ?>
+            <?= $mylib->section_service(['imagem' => 'assets/images/relogio.png', 'titulo' => 'Entrega mais rápida do Olimpo', 'paragrafo' => 'Entrega feita o mais rápido que Hermes consegue']) ?>
 
-            <?= section_service(['imagem' => 'assets/images/balao.png', 'titulo' => 'Suporte rápido e gratuito', 'paragrafo' => 'Até os Deuses ficam com inveja']) ?>
+            <?= $mylib->section_service(['imagem' => 'assets/images/balao.png', 'titulo' => 'Suporte rápido e gratuito', 'paragrafo' => 'Até os Deuses ficam com inveja']) ?>
         </div>
         </div>
         </section>
 
         <!-- CARREGAMENTO DOS LIVROS -->
-        <?= abertura_light(['titulo' => 'Melhores livros', 'descricao' => 'Para todos os gostos', 'id' => 'Livros']) ?>
+        <?= $mylib->abertura_light(['titulo' => 'Melhores livros', 'descricao' => 'Para todos os gostos', 'id' => 'Livros']) ?>
         <div class="section-livros">
             <div class="section-livros--photos">
 
-                <?= carregarLivros()?>
+                <?= $mylib->carregarLivros()?>
 
             </div>
             <a href="./inc/view/cadastrarExibirlivros.php" class="button">Mais livros</a>
@@ -58,16 +59,16 @@
         </div>
         </section>
 
-        <?= abertura_dark(['titulo' => 'Melhores escritores', 'descricao' => 'Best-sellers', 'id' => 'autor']) ?>
+        <?= $mylib->abertura_dark(['titulo' => 'Melhores escritores', 'descricao' => 'Best-sellers', 'id' => 'autor']) ?>
         <div class="section-team">
             <div class="sliders">
                 
-                <?= slider_team(['nome' => 'V.E Schwab' , 'role' => 'Autora de A vida invisivel de Addie LaRue' , 'imagem' => 'media/v-e-schwab.png']); ?>
+                <?= $mylib->slider_team(['nome' => 'V.E Schwab' , 'role' => 'Autora de A vida invisivel de Addie LaRue' , 'imagem' => 'media/v-e-schwab.png']); ?>
 
 
-                <?= slider_team(['nome' => 'Matt Haig' , 'role' => 'Autor de A biblioteca da meia-noite' , 'imagem' => 'media/haig.png']); ?>
+                <?= $mylib->slider_team(['nome' => 'Matt Haig' , 'role' => 'Autor de A biblioteca da meia-noite' , 'imagem' => 'media/haig.png']); ?>
 
-                <?= slider_team(['nome' => 'Victoria Aveyard' , 'role' => 'Escritora de A Rainha Vermelha' , 'imagem' => 'media/aveyard.png']); ?>
+                <?= $mylib->slider_team(['nome' => 'Victoria Aveyard' , 'role' => 'Escritora de A Rainha Vermelha' , 'imagem' => 'media/aveyard.png']); ?>
                                     
 
             </div>
@@ -77,11 +78,11 @@
 
 
         <!-- CARREGAMENTO DAS SUGESTOES DO CLIENTE -->
-        <?= abertura_light(['titulo' => 'Clientes', 'descricao' => 'Sugestões de clientes', 'id' => 'Clientes']) ?>
+        <?= $mylib->abertura_light(['titulo' => 'Clientes', 'descricao' => 'Sugestões de clientes', 'id' => 'Clientes']) ?>
         <div class="section-testimonials">
         <div class="sliders">         
             <?php  
-                $slides = rfile('./inc/controller/sugestoes'); 
+                $slides = $mylib->rfile('./inc/sugestoes'); 
                 foreach($slides as $slide) {
                     echo '</br>'.$slide;
                 }
@@ -93,26 +94,26 @@
 
         <?php include './inc/appearance/companies.php'; ?>
 
-        <?= abertura_light(['titulo' => 'Preços', 'descricao' => 'Assinaturas', 'id' => 'Preco']) ?>
+        <?= $mylib->abertura_light(['titulo' => 'Preços', 'descricao' => 'Assinaturas', 'id' => 'Preco']) ?>
         <div class="section-price">
-            <?= price_item(['nome' => 'Leitor Bebê', 'preco' => 'R$ 10.00', 'periodo' => 'Mês', 'item' => '<span>Esse plano é: </span>', 'desc' => 'Para pequenos leiores que acabaram de chegar ao mundo ou ainda estão aprendendo a falar e descobrindo o mundo ao seu redor'])?>
+            <?= $mylib->price_item(['nome' => 'Leitor Bebê', 'preco' => 'R$ 10.00', 'periodo' => 'Mês', 'item' => '<span>Esse plano é: </span>', 'desc' => 'Para pequenos leiores que acabaram de chegar ao mundo ou ainda estão aprendendo a falar e descobrindo o mundo ao seu redor'])?>
             
-            <?= price_item(['nome' => 'Leitor iniciante', 'preco' => 'R$ 18.90', 'periodo' => 'Mês', 'item' => '<span>Esse plano é: </span>', 'desc' => 'Para leitores que necessitam de alguma ajuda para ler ou que estão se aventurando pelo vasto mundo da leitura'])?>
+            <?= $mylib->price_item(['nome' => 'Leitor iniciante', 'preco' => 'R$ 18.90', 'periodo' => 'Mês', 'item' => '<span>Esse plano é: </span>', 'desc' => 'Para leitores que necessitam de alguma ajuda para ler ou que estão se aventurando pelo vasto mundo da leitura'])?>
 
-            <?= price_item(['nome' => 'Leitor autônomo', 'preco' => 'R$ 29.90', 'periodo' => 'Mês', 'item' => '<span>Esse plano é: </span>', 'desc' => 'Para crianças e jovens que já se tornaram grandes leitores e se atreven a ler obras mais completas e longas'])?>
+            <?= $mylib->price_item(['nome' => 'Leitor autônomo', 'preco' => 'R$ 29.90', 'periodo' => 'Mês', 'item' => '<span>Esse plano é: </span>', 'desc' => 'Para crianças e jovens que já se tornaram grandes leitores e se atreven a ler obras mais completas e longas'])?>
 
-            <?= price_item(['nome' => 'Leitor Experiente', 'preco' => 'R$ 49.99', 'periodo' => 'Mês', 'item' => '<span>Esse plano é: </span>', 'desc' => 'Para leitores veteranos que não tem medo de se arriscar em um mundo completamente novo e cheio de novos livros'])?>
+            <?= $mylib->price_item(['nome' => 'Leitor Experiente', 'preco' => 'R$ 49.99', 'periodo' => 'Mês', 'item' => '<span>Esse plano é: </span>', 'desc' => 'Para leitores veteranos que não tem medo de se arriscar em um mundo completamente novo e cheio de novos livros'])?>
 
         </div>
         </div>
         </section>
 
-        <?= abertura_light(['titulo' => 'Os livros', 'descricao' => 'Podem te levar a qualquer lugar do mundo', 'id' => 'premium']) ?>     
+        <?= $mylib->abertura_light(['titulo' => 'Os livros', 'descricao' => 'Podem te levar a qualquer lugar do mundo', 'id' => 'premium']) ?>     
         <div style="color: white;"><?php include './inc/appearance/carrosel.php'; ?> </div>     
         </div>
         </section>
 
-        <?= abertura_dark(['titulo' => 'Detalhes', 'descricao' => 'Sobre nossa empresa', 'id' => 'Detalhes']) ?>
+        <?= $mylib->abertura_dark(['titulo' => 'Detalhes', 'descricao' => 'Sobre nossa empresa', 'id' => 'Detalhes']) ?>
         <div class="section-facts">
             <div class="section-fact">
                 <h3>10000</h3>
@@ -182,7 +183,7 @@
 
 
     <?php if(isset($_SESSION['email'])):?>
-        <?=  abertura_light(['titulo' => 'Sugestões', 'descricao' => 'Deixe sua sugestão aqui', 'id' => 'Sugestoes'])?>
+        <?=  $mylib->abertura_light(['titulo' => 'Sugestões', 'descricao' => 'Deixe sua sugestão aqui', 'id' => 'Sugestoes'])?>
         
 
         <?php

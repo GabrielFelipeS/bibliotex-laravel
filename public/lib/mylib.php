@@ -1,8 +1,8 @@
 <?php
-namespace public\lib\mylib;
 
 use App\Models\Livro;
 use App\Models\Vendedor;
+
 /**
 * cria um slide
 *
