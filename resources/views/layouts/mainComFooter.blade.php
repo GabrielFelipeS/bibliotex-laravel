@@ -47,7 +47,8 @@
         
     <main> 
         @if(session('msg'))
-            <p class="msg">{{ session('msg') }}</p>
+            <p class="msg" id="mensagem">{{ session('msg') }}</p>
+            <script id="script" src="./js/deletarMensagem.js"></script>
         @endif
         @yield('content')
     </main>    
@@ -70,7 +71,8 @@
                     </p>
             </div>
             <div class="footer--item area3">
-                <form method="POST" action="/projeto/inc/controller/ProcessamentoCadastrar_email.php">
+                <form method="post" action="/sugestoes/CadastrarEmail">
+                    @csrf
                     <input type="email" name="email" placeholder="INSIRA UM EMAIL PARA SE CADASTRAR" required/>
                     <button class="button">Inscreva-se</button>
                 </form>

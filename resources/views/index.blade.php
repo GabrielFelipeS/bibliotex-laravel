@@ -54,7 +54,7 @@
                 <?= $mylib->carregarLivros()?>
 
             </div>
-            <a href="./inc/view/cadastrarExibirlivros.php" class="button">Mais livros</a>
+            <a href="/cadastrarExibirlivros" class="button">Mais livros</a>
         </div>
         </div>
         </section>
@@ -224,8 +224,9 @@
         <?php endif; ?>
         
 
-        <div class="section-contact" id= 'Sugestoes?sugestao=recebida'>
-            <form method="POST" enctype="multipart/form-data" action="./inc/controller/sugestao.php" >
+        <div class="section-contact" id='sugestoes'>
+            <form method="POST" enctype="multipart/form-data" action="/enviar/sugestao" >
+                @csrf
                 <div class="section-contact--split">
                     <input type="text" name="name" placeholder="NOME" required/>
                     <input type="text" name="email" placeholder="EMAIL" required/>
@@ -241,7 +242,11 @@
         </div>
         </div>
         </section>
+<<<<<<< HEAD
         @endauth
+=======
+    @endauth
+>>>>>>> 53d1cc8cd775916f391c678d6960c178b1da7c13
 
         <section class="section-map" title="CONTATOS">
             <div class="section-map--area">

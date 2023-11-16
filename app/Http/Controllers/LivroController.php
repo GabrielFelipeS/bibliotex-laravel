@@ -9,6 +9,11 @@ use App\Models\Livro;
 class LivroController extends Controller
 {
 
+    function cadastrarExibirlivros() {
+        return view('cadastrarExibirLivros');
+    }
+
+
       /**
      *  @param ISBN : Informarma o ISBN do livro
      * @return livro : retorna o livro encontrado
