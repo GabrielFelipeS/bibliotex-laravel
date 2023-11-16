@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
             VendedoresSeeder::class,
             EnderecosSeeder::class,
             ComprasSeeder::class,
-            UsuariosSeeder::class,    
+            UsersSeeder::class,    
         ]);
     }
 }

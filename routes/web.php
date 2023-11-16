@@ -12,14 +12,16 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-use App\Http\Controllers\UsuarioController;
-Route::get('/', [UsuarioController::class, 'index']);
-Route::post('/', [UsuarioController::class, 'index']);
-Route::get('/usuario/cadastrar', [UsuarioController::class, 'create']);
-Route::post('/usuario', [UsuarioController::class, 'store']);
+use App\Http\Controllers\UserController;
 
-Route::post('/login', [UsuarioController::class, 'login'])->name('login');
-Route::get('/sair', [UsuarioController::class, 'sair'])->name('sair');
+Route::get('/', [UserController::class, 'index']);
+Route::post('/', [UserController::class, 'index']);
+Route::get('/usuario/cadastrar', [UserController::class, 'create']);
+
+Route::post('/usuario', [UserController::class, 'store']);
+
+Route::post('/login', [UserController::class, 'login'])->name('login');
+Route::get('/sair', [UserController::class, 'sair'])->name('sair');
 
 Route::get('/login', function () {
     return view('usuario/loginUsuario');
