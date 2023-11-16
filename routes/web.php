@@ -33,13 +33,12 @@ Route::any('usuario/login', function () {
     return view('usuario/loginUsuario');
 })->middleware('guest');
 
-<<<<<<< HEAD
+
 //Teste
 Route::get('/comprarLivro', function () {
     return view('livros/comprarLivro');
 });
-=======
 
 Route::get('/cadastrarExibirlivros', [LivroController::class, 'cadastrarExibirlivros']);
 
->>>>>>> 53d1cc8cd775916f391c678d6960c178b1da7c13
+

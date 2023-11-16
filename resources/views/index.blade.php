@@ -242,11 +242,8 @@
         </div>
         </div>
         </section>
-<<<<<<< HEAD
-        @endauth
-=======
     @endauth
->>>>>>> 53d1cc8cd775916f391c678d6960c178b1da7c13
+
 
         <section class="section-map" title="CONTATOS">
             <div class="section-map--area">
