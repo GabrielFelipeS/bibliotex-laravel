@@ -73,7 +73,6 @@ class mylib extends Controller {
     * @return string | cogido HTML
     *
     */
-
     function slide_area($data){
         $html = '<div class="slide "><div class="slidearea sem_fundo"><h1>'.$data['titulo'].'<br/><span>'.$data['titulo_colorido'].'</span></h1><h2>'.$data['subtitulo'].'</h2><a href="" class="button">'.$data['botao'].'!</a></div>
                     <div class="sliders-pointers ">
@@ -91,11 +90,11 @@ class mylib extends Controller {
      * @return string | cogido HTML
      * 
      */
-
     function abertura_light($data) {
+        $desc = $data['descricao'] ?? '';
         $html = '<section class="default light " id="'.$data['id'].'">
         <div class="section-title">'.$data['titulo'].'</div>
-        <div class="section-desc">'.$data['descricao'].'</div>
+        <div class="section-desc">'. $desc .'</div>
         <div class="section-body">';
         return $html;
     }
@@ -107,12 +106,12 @@ class mylib extends Controller {
      * @return string | cogido HTML
      * 
      */
-
     function abertura_dark($data) {
+        $desc = $data['descricao'] ?? '';
         $html = '
         <section class="default dark " id="'.$data['id'].'">
         <div class="section-title">'.$data['titulo'].'</div>
-        <div class="section-desc">'.$data['descricao'].'</div>
+        <div class="section-desc">'. $desc .'</div>
         <div class="section-body ">';
         return $html;
     }
@@ -276,7 +275,6 @@ class mylib extends Controller {
         echo $html;
     }
 
-
     /**
      * Carrega todos os livros do banco de dados, mostrando suas informações
      * @return string | codigo HTML
@@ -304,7 +302,7 @@ class mylib extends Controller {
         }
 
         foreach($livros as $livro) {               
-            $html .= $this->section_livros($callback($livro));
+            $html .= $this->section_livros($this->$callback($livro));
         }
 
         echo $html;    

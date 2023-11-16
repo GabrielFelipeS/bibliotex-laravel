@@ -36,5 +36,5 @@ Route::any('usuario/login', function () {
 })->middleware('guest');
 
 
-Route::get('/cadastrarExibirlivros', [LivroController::class, 'cadastraExibirLivros']);
+Route::get('/cadastrarExibirlivros', [LivroController::class, 'cadastrarExibirlivros']);
 
