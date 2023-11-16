@@ -66,7 +66,7 @@
           <input type="email" id="email" name="email" placeholder="Email" required class="rounded-input">
           </div>
           <div class="form-group">
-          <input type="password" id="senha" name="senha" placeholder="Senha" required class="rounded-input">
+          <input type="password" id="senha" name="password" placeholder="Senha" required class="rounded-input">
           </div>
           <input type="submit" value="Login" class="button" />
         </form>

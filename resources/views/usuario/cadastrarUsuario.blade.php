@@ -1,4 +1,8 @@
-<?php include './lib/mylib.php'; ?>
+<?php 
+        use App\Http\Controllers\mylib;
+        $mylib = new mylib;
+    ?>
+
 @extends('layouts.mainComFooter')
 
 @section('title', 'Cadastro Usuário')
@@ -39,7 +43,7 @@
  </style>
 
 
-<?= @abertura_dark(['titulo' => 'Cadastra-se', 'id' => 'cadastroUsuario']) ?>
+<?= $mylib->abertura_dark(['titulo' => 'Cadastra-se', 'id' => 'cadastroUsuario', 'descricao' => 'Informe seus dados']) ?>
 
       <div class="section-contact">
           <form method="POST" enctype="multipart/form-data"  action="/usuario">
@@ -52,7 +56,7 @@
 
               <input type="text" name="email" placeholder="E-mail" required style="color: white;"/>
 
-              <input type="password" id = "senhaCad" name="senha" placeholder="Senha" required style="color: white; "/>
+              <input type="password" id = "senhaCad" name="password" placeholder="Senha" required style="color: white; "/>
 
               <div class="custom-file">
                   <input type="file" accept="image/*" class="custom-file-input" id="fotoPerfil" name="fotoPerfil" >                        

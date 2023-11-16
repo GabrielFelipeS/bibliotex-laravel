@@ -31,9 +31,9 @@ class UserController extends Controller
         $usuario->nome= $request->nome;
         $usuario->nascimento =  date('Y-m-d', strtotime(str_replace('/', '-', $request->nascimento)));
         $usuario->telefone= $request->telefone;
-        $usuario->email = $request->email;
+        $usuario->email = trim($request->email);
 
-        $usuario->password = password_hash($request->password, PASSWORD_DEFAULT);
+        $usuario->password = Hash::make($request->password);
 
         if($request->hasFile('fotoPerfil') && $request->file('fotoPerfil')->isValid()){
             $requestFotoPerfil = $request->fotoPerfil;
@@ -51,10 +51,10 @@ class UserController extends Controller
     }
 
     public function login(Request $request){        
-        $email = $request->input('email');
-        $senha = $request->input('senha');
+        $email = trim($request->input('email'));
+        $password = $request->input('password');
 
-        if (Auth::attempt(['email' => $email, 'password' => $senha])) {
+        if (Auth::attempt(['email' => $email, 'password' => $password])) {
             return redirect('/')->with('msg', 'Login realizado com sucesso');
         } else {
             return redirect('/')->with('msg', 'E-mail ou senha inválidos');
@@ -92,7 +92,7 @@ class UserController extends Controller
                 'nascimento' => $request->nascimento,
                 'telefone' => $request->telefone,
                 'email' => $request->email,
-                'password' => $request->password,
+                'password' => Hash::make($request->password),
                 'fotoPerfil' => $request->fotoPerfil,
             ]);
     }
