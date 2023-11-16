@@ -4,17 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Models\Usuario;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UsuarioController extends Controller
 {
     public function index() {
         $usuarios = $this->findAll();
-        /*if(Auth::check()) {
-            $email = $request->input('email');
-            $senha = $request->input('senha');    
-        }*/
         return view('welcome');
     }
 
@@ -24,13 +21,13 @@ class UsuarioController extends Controller
 
     
     public function store(Request $request) {
-        $usuarioExiste = Usuario::where('email', $request->email)->first();
+        $usuarioExiste = User::where('email', $request->email)->first();
         
         if($usuarioExiste) {
             return redirect('/')->with('msg', 'E-mail já cadastrado');
         }
 
-        $usuario = new Usuario;
+        $usuario = new User;
         $usuario->nome= $request->nome;
         $usuario->nascimento =  date('Y-m-d', strtotime(str_replace('/', '-', $request->nascimento)));
         $usuario->telefone= $request->telefone;
@@ -57,33 +54,32 @@ class UsuarioController extends Controller
         $email = $request->input('email');
         $senha = $request->input('senha');
 
-        $usuario = Usuario::where('email', $email)->first();
-
-        if(!$usuario || !password_verify($senha, $usuario->senha)){
+        if (Auth::attempt(['email' => $email, 'password' => $senha])) {
+            return redirect('/')->with('msg', 'Login realizado com sucesso');
+        } else {
             return redirect('/')->with('msg', 'E-mail ou senha inválidos');
         }
+    }
 
-       // Auth::login($usuario);
-        if (Auth::attempt(['email' => $email, 'senha' => $senha])) {
-            return redirect('/')->with('msg', 'Login realizado com sucesso');
-        }
-        return redirect('/')->with('msg', 'Login não realizado com sucesso');
+    public function sair() {
+        Auth::logout();
+        return redirect('/')->with('msg', 'Deslogado com sucesso');('/');
     }
 
     
 
     public function find($email) {
-        $usuario = Usuario::where('email', $email)->first();
+        $usuario = User::where('email', $email)->first();
         return $usuario;
     }
 
     public function findAll() {
-        $usuarios = Usuario::all();
+        $usuarios = User::all();
         return $usuarios;
     }
 
     public function update(Request $request) {
-        $usuarioExiste = Usuario::where('email', $request->emailDeUpdate)->first();
+        $usuarioExiste = User::where('email', $request->emailDeUpdate)->first();
         if(!$usuarioExiste) {
             return redirect('/')->with('message', 'Não existe um cadastro com esse email');
         }

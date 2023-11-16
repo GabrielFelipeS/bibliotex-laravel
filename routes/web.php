@@ -17,10 +17,15 @@ Route::get('/', [UsuarioController::class, 'index']);
 Route::post('/', [UsuarioController::class, 'index']);
 Route::get('/usuario/cadastrar', [UsuarioController::class, 'create']);
 Route::post('/usuario', [UsuarioController::class, 'store']);
+
 Route::post('/login', [UsuarioController::class, 'login'])->name('login');
+Route::get('/sair', [UsuarioController::class, 'sair'])->name('sair');
 
+Route::get('/login', function () {
+    return view('usuario/loginUsuario');
+})->middleware('guest');
 
-Route::get('usuario/login', function () {
+Route::any('usuario/login', function () {
     return view('usuario/loginUsuario');
 })->middleware('guest');
 

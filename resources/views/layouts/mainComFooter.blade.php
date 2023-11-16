@@ -33,7 +33,7 @@
                         <li><a href="/projeto/index.php#Detalhes">Detalhes</a></li>
                         @auth
                         <li><a href="/projeto/index.php#Sugestoes">Sugestoes</a></li>
-                        <li><a href="/projeto/index.php#Sugestoes">Sair</a></li>
+                        <li><a href="/sair">Sair</a></li>
                         @endauth
                         @guest
                         <li><a href="/usuario/login">Login</a></li>

@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\User; 
+use Illuminate\Support\Facades\Hash;
 
 class UsuariosSeeder extends Seeder
 {
@@ -18,7 +19,7 @@ class UsuariosSeeder extends Seeder
             'nascimento' => '2023-04-14',
             'telefone' => '(11) 2484-515',
             'email' => 'admin@admin.com',
-            'senha' => '$2y$10$AL2JJvjD0dqPojG0B/jGGei8Rq851T0NhaMTSipXXsq8nFlYELBBa', // Senha criptografada
+            'password' => Hash::make('123456'), 
             'fotoPerfil' => 'fotosPerfil/Administrador.png',
         ]);
         
@@ -28,7 +29,7 @@ class UsuariosSeeder extends Seeder
             'nascimento' => '2023-04-14',
             'telefone' => '(11) 2484-515',
             'email' => 'teste@teste.com',
-            'senha' => '$2y$10$QgbyE/MweK0/HgwlVI5mqOc3R90KmsXXyf/qfiRFgYkzrqhfnPnci', // Senha criptografada
+            'password' => Hash::make('teste'), 
             'fotoPerfil' => 'fotosPerfil/Teste Testando.png',
         ]);
     }
