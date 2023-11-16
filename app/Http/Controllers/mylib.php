@@ -282,7 +282,7 @@ class mylib extends Controller {
     function carregarInformacoesDoLivro($livro) {
         $livro['nome_da_foto'] = '/'.$livro['nomeDaFoto'];
 
-        return ['titulo' => $livro['nomeLivro'], 'paragrafo' => $livro['descricao'], 'imagem' => $livro['nome_da_foto'], 'botao' => '<a href="/projeto/inc/view/cadastrarCompra.php?ISBN='.$livro['ISBN'].'"><button type="button" class="btn btn-primary">Comprar</button></a>'];
+        return ['titulo' => $livro['nomeLivro'], 'paragrafo' => $livro['descricao'], 'imagem' => $livro['nome_da_foto'], 'botao' => '<a href="/comprarLivro?ISBN='.$livro['ISBN'].'"><button type="button" class="btn btn-primary">Comprar</button></a>'];
     }
 
     /**

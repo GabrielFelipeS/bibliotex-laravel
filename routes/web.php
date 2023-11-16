@@ -40,5 +40,5 @@ Route::get('/comprarLivro', function () {
 });
 
 Route::get('/cadastrarExibirlivros', [LivroController::class, 'cadastrarExibirlivros']);
-
+Route::post('/CadastrarLivro', [LivroController::class, 'store']);
 
