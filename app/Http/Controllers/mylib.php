@@ -9,6 +9,64 @@ use App\Models\Vendedor;
 class mylib extends Controller {
 
     /**
+     * @param request | sugestão para ser cadastrada
+     */
+    function cadastrarSugestao(Request $request) {
+        $new_name = '';
+        if(isset($_FILES['imagem'])) {
+            echo '<br>teste 3';
+            $ext = strtolower(substr($_FILES['imagem']['name'],-4)); //Pegando extensão do arquivo
+            $new_name = date("Y.m.d-H.i.s") . $ext; //Definindo um novo nome para o arquivo
+            $dir = './assets/imagens/'; //Diretório para uploads, coloquei em lib pra facilitar o senhor achar
+            move_uploaded_file($_FILES['imagem']['tmp_name'], $dir.$new_name); //Fazer upload do arquivo     
+        }
+       
+        $myfile = fopen('./inc/sugestoes', "a") or die("Você não tem permissão para gravar neste diretório!");
+
+        $this->wline($myfile, $_POST['name']);
+        $this->wline($myfile, $_POST['email']);
+        $this->wline($myfile, $_POST['assunto']);
+        $this->wline($myfile, $_POST['message']);
+        $this->wline($myfile, $new_name);
+
+        return redirect('/');
+    }
+
+
+    /**
+     * @param request | email para cadastrar no arquivo emails do /public/inc
+     */
+    function cadastrarEmail(Request $request) {
+        $email = $request->email; 
+    
+        $email_post = fopen('./inc/arquivo_temp', "w") or die("Você não tem permissão para gravar neste diretório!");
+        $this->wline($email_post, $email);
+        fclose($email_post);
+    
+        $email_post = fopen('./inc/arquivo_temp', "r") or die("Você não tem permissão para gravar neste diretório!");
+        $post = fgets($email_post);
+        fclose($email_post);
+    
+        $myfile = fopen('./inc/emails', "r") or die("Você não tem permissão para gravar neste diretório!");
+    
+        while(!feof($myfile)){      
+            $email_arquivo = fgets($myfile);
+    
+            if (strcasecmp($email_arquivo, $post) == 0){  //Verifica se já não existe
+                fclose($myfile);
+                fclose($email_post);
+                return redirect('/');
+            }
+        }
+        fclose($myfile);
+    
+        $myfile = fopen('./inc/emails', "a") or die("Você não tem permissão para gravar neste diretório!");
+        $this->wline($myfile, $email);
+        fclose($myfile);
+        return redirect('/');
+    }
+
+    /**
     * cria um slide
     *
     * @param array associativo | dados do slide_area(['titulo' => '', 'titulo_colorido' => '', 'subtitulo' => '', 'botao' => ''])
@@ -25,7 +83,6 @@ class mylib extends Controller {
         </div>';
         return $html;
     }
-
 
     /**
      * Cria a abertura de um bloco ligth
@@ -238,8 +295,7 @@ class mylib extends Controller {
         $html = "";
     
         $livros = Livro::all();
-        #$livros = getAll("livros");
-        #var_dump($livros);
+
         $callback = '';
         if($this->validar($_SESSION['email'])) {
             $callback = 'opcoesEditarExcluir';
@@ -265,7 +321,7 @@ class mylib extends Controller {
     function carregarfunc() {
         $html = "";
         $vendedores = Vendedor::All();
-        #$vendedores = getAll("vendedor");
+
         foreach($vendedores as $vendedor) {               
             $html .= "<div class='space'> Codigo do vendedor: ".$vendedor['codigo_vendedor']."</br>".
                     "Nome: ".$vendedor['nomeCompleto']."</br>".
@@ -285,12 +341,6 @@ class mylib extends Controller {
 
         $html .= @$this->section_livros(['titulo' => $dadosDoLivro['nomeLivro'], 'paragrafo' => $dadosDoLivro['descricao'], 'imagem' => '/projeto/'.$dadosDoLivro['nome_da_foto'],'botao' => '<a href="comprarLivro.php?ISBN='.$dadosDoLivro['ISBN'].'"><button type="button" class="btn btn-primary">Comprar</button></a>', 'botao' => '']);
 
-        #$html = "<img style=' width:200px; height:280px;' src= ./".$dadosDoLivro['nome_da_foto']." alt='Capa do livro> '";
-        #$html .= '<div "><p><strong> '.$dadosDoLivro['nomeLivro'].'</strong></p></br>';
-        #$html .= '';
-        
-
-
         return $html;
     }
 
@@ -309,36 +359,5 @@ class mylib extends Controller {
         }
     }
 
-    /**
-     * @param request | email para cadastrar no arquivo emails do /public/inc
-     */
-    function cadastrarEmail(Request $request) {
-        $email = $request->email; 
-    
-        $email_post = fopen('./inc/arquivo_temp', "w") or die("Você não tem permissão para gravar neste diretório!");
-        wline($email_post, $email);
-        fclose($email_post);
-    
-        $email_post = fopen('./inc/arquivo_temp', "r") or die("Você não tem permissão para gravar neste diretório!");
-        $post = fgets($email_post);
-        fclose($email_post);
-    
-        $myfile = fopen('./inc/emails', "r") or die("Você não tem permissão para gravar neste diretório!");
-    
-        while(!feof($myfile)){      
-            $email_arquivo = fgets($myfile);
-    
-            if (strcasecmp($email_arquivo, $post) == 0){  //Verifica se já não existe
-                fclose($myfile);
-                fclose($email_post);
-                return view('index');
-            }
-        }
-        fclose($myfile);
-    
-        $myfile = fopen('./inc/emails', "a") or die("Você não tem permissão para gravar neste diretório!");
-        wline($myfile, $email);
-        fclose($myfile);
-        return view('index');
-    }
+
 }

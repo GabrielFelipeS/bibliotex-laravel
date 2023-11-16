@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\mylib;
 
 Route::get('/', [UserController::class, 'index']);
 Route::post('/', [UserController::class, 'index']);
@@ -21,7 +22,8 @@ Route::get('/usuario/cadastrar', [UserController::class, 'create']);
 Route::post('/usuario', [UserController::class, 'store']);
 
 Route::post('/login', [UserController::class, 'login'])->name('login');
-Route::post('/sugestors/CadastrarEmail"', [mylib::class, 'cadastrarEmail']);
+Route::post('/sugestoes/CadastrarEmail', [mylib::class, 'cadastrarEmail']);
+Route::post('/enviar/sugestao', [mylib::class, 'cadastrarSugestao']);
 Route::get('/sair', [UserController::class, 'sair'])->name('sair');
 
 Route::get('/login', function () {

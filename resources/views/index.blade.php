@@ -182,7 +182,7 @@
 
 
 
-    <?php if(isset($_SESSION['email'])):?>
+    @auth
         <?=  $mylib->abertura_light(['titulo' => 'Sugestões', 'descricao' => 'Deixe sua sugestão aqui', 'id' => 'Sugestoes'])?>
         
 
@@ -224,8 +224,9 @@
         <?php endif; ?>
         
 
-        <div class="section-contact" id= 'Sugestoes?sugestao=recebida'>
-            <form method="POST" enctype="multipart/form-data" action="./inc/controller/sugestao.php" >
+        <div class="section-contact" id='sugestoes'>
+            <form method="POST" enctype="multipart/form-data" action="/enviar/sugestao" >
+                @csrf
                 <div class="section-contact--split">
                     <input type="text" name="name" placeholder="NOME" required/>
                     <input type="text" name="email" placeholder="EMAIL" required/>
@@ -241,8 +242,7 @@
         </div>
         </div>
         </section>
-        
-        <?php endif; ?>
+    @endauth
 
         <section class="section-map" title="CONTATOS">
             <div class="section-map--area">
