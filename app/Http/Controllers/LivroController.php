@@ -10,8 +10,8 @@ class LivroController extends Controller
 {
 
       /**
-     *  @param $ISBN : Informarma o ISBN do livro
-     * @return $livro : retorna o livro encontrado
+     *  @param ISBN : Informarma o ISBN do livro
+     * @return livro : retorna o livro encontrado
      */
     public function find($ISBN) {
         $livro = Livro::where('ISBN', $ISBN)->first();
@@ -19,7 +19,7 @@ class LivroController extends Controller
     }
 
     /**
-     * @return $livros : retorna os livros cadastrados no banco de dados
+     * @return livros : retorna os livros cadastrados no banco de dados
      */
     public function findAll() {
         $livros = Livro::all();
@@ -28,7 +28,7 @@ class LivroController extends Controller
 
     /**
      *  @param post $request : Informações para editar um livro
-     * @return null : redireciona para uma página
+     * @return redireciona para uma página
      */
     public function update(Request $request) {
 
@@ -49,7 +49,7 @@ class LivroController extends Controller
 
     /**
      *  @param post $request : Informações para cadastrar um livro
-     * @return null : redireciona para uma página
+     * @return redireciona para uma página
      */
     public function store(Request $request) {
         $livroJaExiste = Livro::where('ISBN', $request->ISBN)->first();
@@ -72,8 +72,8 @@ class LivroController extends Controller
     }
 
     /**
-     *  @param $ISBN : Informarma o ISBN do livro
-     * @return $livro : redireciona a pagina
+     *  @param ISBN : Informarma o ISBN do livro
+     * @return redireciona a pagina
      */
     public function delete($ISBN) {
         
