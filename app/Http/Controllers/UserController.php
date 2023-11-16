@@ -33,7 +33,7 @@ class UserController extends Controller
         $usuario->telefone= $request->telefone;
         $usuario->email = $request->email;
 
-        $usuario->senha= password_hash($request->senha, PASSWORD_DEFAULT);
+        $usuario->password = password_hash($request->password, PASSWORD_DEFAULT);
 
         if($request->hasFile('fotoPerfil') && $request->file('fotoPerfil')->isValid()){
             $requestFotoPerfil = $request->fotoPerfil;
@@ -84,7 +84,7 @@ class UserController extends Controller
             return redirect('/')->with('message', 'Não existe um cadastro com esse email');
         }
 
-        DB::table('usuarios')
+        DB::table('users')
             ->where('email', $request->query('emailDeUpdate'))
             ->limit(1)
             ->update([
@@ -92,13 +92,13 @@ class UserController extends Controller
                 'nascimento' => $request->nascimento,
                 'telefone' => $request->telefone,
                 'email' => $request->email,
-                'senha' => $request->senha,
+                'password' => $request->password,
                 'fotoPerfil' => $request->fotoPerfil,
             ]);
     }
 
     public function delete($email) {
-        DB::table('usuarios')
+        DB::table('users')
             ->where('email', $email)
             ->limit(1)
             ->delete();
