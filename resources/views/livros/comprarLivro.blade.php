@@ -42,7 +42,7 @@
     var_dump($required);
     */
     $ISBN = $required['ISBN'] ?? '';
-    $id = $required['id'] ?? '';
+    $id = $required['id'] ?? '1';
     $dadosDoLivro = Livro::where('ISBN', $ISBN)->first();
 
     $mensagemBotao = $required['mensagemBotao'] ?? 'Efetuar Compra!';
@@ -67,7 +67,7 @@
 
 
 
-<?= $mylib->abertura_light(['titulo' => $titulo, 'id' => 'inserirLivros', 'descricao' => 'inserirLivros']) ?>
+<?= $mylib->abertura_light(['titulo' => 'teste', 'id' => 'inserirLivros', 'descricao' => 'inserirLivros']) ?>
 
     <?php 
     //INICO- trecho de confirmação de exclusão
@@ -110,12 +110,12 @@
             <!-- ./inc/salvarAlteracoes.php?ISBN=<#?=$required['ISBN']?> -->
                 <form method="POST" enctype="multipart/form-data" action="../controller/<?=$link?>">
                     <div class="section-contact--split">
-                        <input type="text" value="<?= $_SESSION['codigoVendedor'] ?? '' ?>" name="codigo_vendedor" placeholder="CODIGO DO VENDEDOR" required />
-                        <input type="text" value="<?= $_SESSION['cpf'] ?? '' ?>" name="cpf" placeholder="CPF" required />
+                        <input type="text" value="" placeholder="CODIGO DO VENDEDOR" required />
+                        <input type="text" value="" name="cpf" placeholder="CPF" required />
                     </div>
                     <div class="section-contact--split">
-                        <input type="text" name="quantidade" value="<?= $_SESSION['quantidade'] ?? '' ?>" placeholder="QUANTIDADE" required/>
-                        <input type="text" value="<?= $_SESSION['cartao'] ?? '' ?>" name="cartao" placeholder="CARTÃO" required />
+                        <input type="text" name="quantidade" value="" placeholder="QUANTIDADE" required/>
+                        <input type="text" value="" name="cartao" placeholder="CARTÃO" required />
                     </div>
                     <input type="submit" value="<?= $mensagemBotao?>" class="button"/>
                 </form>
