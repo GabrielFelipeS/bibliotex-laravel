@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Livro;
 use App\Models\Vendedor;
+use Illuminate\Support\Facades\Auth;
 
 class mylib extends Controller {
 
@@ -295,7 +296,7 @@ class mylib extends Controller {
         $livros = Livro::all();
 
         $callback = '';
-        if($this->validar($_SESSION['email'])) {
+        if(Auth::check() && Auth::user()->role === 'admin') {
             $callback = 'opcoesEditarExcluir';
         } else {
             $callback = 'carregarInformacoesDoLivro';
@@ -310,8 +311,8 @@ class mylib extends Controller {
 
     function opcoesEditarExcluir($livro) {
         return ['titulo' => $livro['nomeLivro'], 'paragrafo' => '
-        <a href="/projeto/inc/controller/excluirLivro.php?ISBN='.$livro['ISBN'].'"><button type="button" class="btn btn-primary" style="background-color: black; border-color: black; margin-right: 25px;"><img style="width: 30px;  filter: invert(1);"" src="/projeto/assets/images/excluir.png" alt="excluir" ></button></a>  
-        <a href="/projeto/inc/view/editarLivro.php?ISBN='.$livro['ISBN'].'"><button type="button" class="btn btn-primary" style="background-color: black; border-color: black;"><img style="width: 30px; filter: invert(1);" src="/projeto/assets/images/editar.png" alt="editar"></button></a>', 'imagem' => '/projeto//'.$livro['nome_da_foto']];
+        <a href="/excluirLivro?ISBN='.$livro['ISBN'].'"><button type="button" class="btn btn-primary" style="background-color: black; border-color: black; margin-right: 25px;"><img style="width: 30px;  filter: invert(1);"" src="/assets/images/excluir.png" alt="excluir" ></button></a>  
+        <a href="/projeto/inc/view/editarLivro.php?ISBN='.$livro['ISBN'].'"><button type="button" class="btn btn-primary" style="background-color: black; border-color: black;"><img style="width: 30px; filter: invert(1);" src="/assets/images/editar.png" alt="editar"></button></a>', 'imagem' => $livro['nomeDaFoto']];
     }
 
 
@@ -340,15 +341,6 @@ class mylib extends Controller {
         $html .= @$this->section_livros(['titulo' => $dadosDoLivro['nomeLivro'], 'paragrafo' => $dadosDoLivro['descricao'], 'imagem' => $dadosDoLivro['nomeDaFoto'],'botao' => '<a href="comprarLivro.php?ISBN='.$dadosDoLivro['ISBN'].'"><button type="button" class="btn btn-primary">Comprar</button></a>', 'botao' => '']);
 
         return $html;
-    }
-
-    public function validar($email) {
-        if(empty($email)) {
-            return false;
-        }
-
-        $admin = "admin@admin.com";
-        return (strcmp($email, $admin) == 0);
     }
 
     function mostrarMensagemDeAviso() {

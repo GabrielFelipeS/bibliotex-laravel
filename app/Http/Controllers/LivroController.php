@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Livro;
+use Exception;
 
 class LivroController extends Controller
 {
@@ -76,22 +77,29 @@ class LivroController extends Controller
     }
 
     private function caminhoImagem($ISBN) {
-         $ext = strtolower(substr($_FILES['imagem']['name'],-4)); //Pegando extensão do arquivo
-        $new_name =  $ISBN .'.'.$ext; //Definindo um novo nome para o arquivo
-        $dir = './media/'; //Diretório para uploads, coloquei em lib pra facilitar o senhor achar
-        move_uploaded_file($_FILES['imagem']['tmp_name'], $dir.$new_name); //Fazer upload do arquivo 
-        $caminho = 'media/'.$new_name;
+        $caminho = "";
+        if(isset($_FILES['imagem'])) {
+            $ext = strtolower(substr($_FILES['imagem']['name'],-4)); //Pegando extensão do arquivo
+            $new_name =  $ISBN .'.'.$ext; //Definindo um novo nome para o arquivo
+            $dir = './media/'; //Diretório para uploads, coloquei em lib pra facilitar o senhor achar
+            move_uploaded_file($_FILES['imagem']['tmp_name'], $dir.$new_name); //Fazer upload do arquivo 
+            $caminho = 'media/'.$new_name;
+        }
         return $caminho;
     }
 
     /**
-     *  @param ISBN : Informarma o ISBN do livro
+     *  @param require : pega do corpo da requisição o ISBN
      * @return redireciona a pagina
      */
-    public function delete($ISBN) {
-        
-        DB::table('livros')->where('ISBN', $ISBN)->delete();
+    public function delete(Request $request) {
+        $ISBN = $request->ISBN;
 
-        return redirect('/')->with('message', 'Livro deletado com sucesso!');
+        try {
+            DB::table('livros')->where('ISBN', $ISBN)->delete();
+            return redirect('/cadastrarExibirlivros')->with('msg', 'Livro deletado com sucesso!');
+        } catch (Exception $e) {
+            return redirect('/cadastrarExibirlivros')->with('msg', 'Este livro não pode ser deletado!');
+        }
     }
 }

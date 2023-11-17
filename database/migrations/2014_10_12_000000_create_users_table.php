@@ -22,6 +22,7 @@ return new class extends Migration
             $table->date('nascimento');
             $table->string('telefone', 13);
             $table->string('fotoPerfil', 40)->nullable();
+            $table->string('role')->default('comum');
             $table->rememberToken();
             $table->timestamps();
         });

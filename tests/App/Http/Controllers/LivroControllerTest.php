@@ -92,7 +92,12 @@ class LivroControllerTest extends TestCase
     public function test_delete() {
         $quantidadeAntesDeDeletar = Livro::count();
         $controller = new LivroController;
-        $controller->delete('2234567890');
+        $requestData = [
+            'ISBN' => '2234567890', // Substitua pelos valores desejados
+        ];
+        
+        $request = new Request($requestData);
+        $controller->delete($request);
 
         $quantidadeAtual = Livro::count();
         $this->assertNotEquals($quantidadeAntesDeDeletar, $quantidadeAtual);

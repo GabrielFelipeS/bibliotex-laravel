@@ -21,6 +21,7 @@ class UsersSeeder extends Seeder
             'email' => 'admin@admin.com',
             'password' => Hash::make('123456'), 
             'fotoPerfil' => 'fotosPerfil/Administrador.png',
+            'role' => 'admin',
         ]);
         
         // Inserção 2
