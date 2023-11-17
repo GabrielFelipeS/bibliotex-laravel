@@ -41,5 +41,6 @@ Route::get('/comprarLivro', function () {
 
 Route::get('/cadastrarExibirlivros', [LivroController::class, 'cadastrarExibirlivros']);
 Route::get('/excluirLivro', [LivroController::class, 'delete']);
+Route::get('/editarLivro', [LivroController::class, 'editar']);
 Route::post('/CadastrarLivro', [LivroController::class, 'store']);
 

@@ -68,6 +68,15 @@ class mylib extends Controller {
     }
 
     /**
+     * @param key | char de busca
+     * @return 
+     */
+    function setValue($key){ 
+        return request($key) ?? '';
+       // return isset(request($key)) ? request($key) : '';
+    }
+
+    /**
     * cria um slide
     *
     * @param array associativo | dados do slide_area(['titulo' => '', 'titulo_colorido' => '', 'subtitulo' => '', 'botao' => ''])
@@ -312,7 +321,7 @@ class mylib extends Controller {
     function opcoesEditarExcluir($livro) {
         return ['titulo' => $livro['nomeLivro'], 'paragrafo' => '
         <a href="/excluirLivro?ISBN='.$livro['ISBN'].'"><button type="button" class="btn btn-primary" style="background-color: black; border-color: black; margin-right: 25px;"><img style="width: 30px;  filter: invert(1);"" src="/assets/images/excluir.png" alt="excluir" ></button></a>  
-        <a href="/projeto/inc/view/editarLivro.php?ISBN='.$livro['ISBN'].'"><button type="button" class="btn btn-primary" style="background-color: black; border-color: black;"><img style="width: 30px; filter: invert(1);" src="/assets/images/editar.png" alt="editar"></button></a>', 'imagem' => $livro['nomeDaFoto']];
+        <a href="/editarLivro?ISBN='.$livro['ISBN'].'"><button type="button" class="btn btn-primary" style="background-color: black; border-color: black;"><img style="width: 30px; filter: invert(1);" src="/assets/images/editar.png" alt="editar"></button></a>', 'imagem' => $livro['nomeDaFoto']];
     }
 
 
@@ -338,7 +347,7 @@ class mylib extends Controller {
     function dados_do_livro($dadosDoLivro) {
         $html = '';
 
-        $html .= @$this->section_livros(['titulo' => $dadosDoLivro['nomeLivro'], 'paragrafo' => $dadosDoLivro['descricao'], 'imagem' => $dadosDoLivro['nomeDaFoto'],'botao' => '<a href="comprarLivro.php?ISBN='.$dadosDoLivro['ISBN'].'"><button type="button" class="btn btn-primary">Comprar</button></a>', 'botao' => '']);
+        $html .= @$this->section_livros(['titulo' => $dadosDoLivro['nomeLivro'], 'paragrafo' => $dadosDoLivro['descricao'], 'imagem' => $dadosDoLivro['nomeDaFoto'],'botao' => '<a href="comprarLivro?ISBN='.$dadosDoLivro['ISBN'].'"><button type="button" class="btn btn-primary">Comprar</button></a>', 'botao' => '']);
 
         return $html;
     }

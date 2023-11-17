@@ -1,55 +1,13 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-  <title>@yield('title')</title>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <link rel="stylesheet" type="text/css" href="/css/style.css" />
-  <link rel="shortcut icon" href="images/livro_icon.png" type="image/png">
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,600,700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
-  <link rel="stylesheet" href="/mdb/css/bootstrap.min.css">
-  <link rel="stylesheet" href="mdb/css/style.css">
-</head>
-<body>
-    <header>
-        <div class="header">
-            <div class="logo">
-                <div class="logoimg"><img src="/images/livro_icon.png" alt="icone livro"></div>
-            </div>
-            <div class="menu">
-                <img class="menu-opener" src="images/menu.png" onclick="clickMenu()"/>
-                <nav id="nav">
-                    <ul>
-                        <li class="active"><a href="/">Home</a></li>
-                        <li><a href="/index.php#Empresa">Empresa</a></li>
-                        <li><a href="/index.php#Servicos">Serviços</a></li>
-                        <li><a href="/index.php#Livros">Livros</a></li>
-                        <li><a href="/index.php#autor">Autores</a></li>
-                        <li><a href="/index.php#Clientes">Clientes</a></li>
-                        <li><a href="/index.php#Preco">Preço</a></li>
-                        <li><a href="/index.php#Detalhes">Detalhes</a></li>
-                        @auth
-                        <li><a href="/index.php#Sugestoes">Sugestoes</a></li>
-                        <li><a href="/sair">Sair</a></li>
-                        @endauth
-                        @guest
-                        <li><a href="/usuario/login">Login</a></li>
-                        <li><a href="/usuario/cadastrar">Cadastrar</a></li>
-                        @endguest
-                    </ul>
-                </nav>
-            </div>
-        </div>
-    </header>
-        
+<?php include './inc/appearance/cabecalho.php'; ?>
+    <title>@yield('title')</title>
+ <?php include './inc/appearance/header.php';?>
+<body>    
     <main> 
         @if(session('msg'))
             <p class="msg" id="mensagem">{{ session('msg') }}</p>
             <script id="script" src="./js/deletarMensagem.js"></script>
         @endif
+        
         @yield('content')
     </main>    
 

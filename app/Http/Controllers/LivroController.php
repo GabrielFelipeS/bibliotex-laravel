@@ -11,7 +11,7 @@ class LivroController extends Controller
 {
 
     function cadastrarExibirlivros() {
-        return view('cadastrarExibirLivros');
+        return view('livros.cadastrarExibirLivros');
     }
 
 
@@ -31,6 +31,11 @@ class LivroController extends Controller
         $livros = Livro::all();
         return $livros;
     }
+
+    public function editar() {
+        return view('livros.editarLivro');
+    }
+
 
     /**
      *  @param post $request : Informações para editar um livro
@@ -69,7 +74,7 @@ class LivroController extends Controller
             $livro->nomeDaFoto = $this->caminhoImagem($request->ISBN);
             
             $livro->save();
-            //return response()->json(['message' => 'Livro criado com sucesso'], 201);
+            
             return redirect('/')->with('message', 'Livro criado com sucesso');
         } else {
             return redirect('/')->with('message', 'Livro já existe');
@@ -94,12 +99,11 @@ class LivroController extends Controller
      */
     public function delete(Request $request) {
         $ISBN = $request->ISBN;
-
         try {
             DB::table('livros')->where('ISBN', $ISBN)->delete();
-            return redirect('/cadastrarExibirlivros')->with('msg', 'Livro deletado com sucesso!');
+            return redirect('cadastrarExibirlivros')->with('msg', 'Livro deletado com sucesso!');
         } catch (Exception $e) {
-            return redirect('/cadastrarExibirlivros')->with('msg', 'Este livro não pode ser deletado!');
+            return redirect('cadastrarExibirlivros')->with('msg', 'Este livro não pode ser deletado!');
         }
     }
 }

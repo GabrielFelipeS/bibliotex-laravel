@@ -4,8 +4,8 @@
 
 @section('content')
 <?php 
-    use App\Http\Controllers\mylib;
-    $mylib = new mylib;
+    use App\Http\Controllers\Mylib;
+    $mylib = new Mylib;
 ?>
 
 <?= $mylib->abertura_light(['titulo' => 'Livros já cadastrados', 'id' => 'LivrosCadastrados']) ?>

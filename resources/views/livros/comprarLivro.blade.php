@@ -1,8 +1,8 @@
 <?php 
     use App\Models\Compra;
     use App\Models\Livro;
-    use App\Http\Controllers\mylib;
-    $mylib = new mylib;
+    use App\Http\Controllers\Mylib;
+    $mylib = new Mylib;
     
 
 ?>

@@ -40,7 +40,7 @@
   .form-group {
     margin-bottom: 20px;
   }
-  .button {
+  .centralizarComPadding {
     padding: 15px 150px;
     border: none;
     margin-left: 5.5rem;
@@ -53,6 +53,7 @@
     margin: 0;
   }
 </style>
+
   @if(session('msg'))
     <p class="msg">{{ session('msg') }}</p>
   @endif
@@ -68,7 +69,7 @@
           <div class="form-group">
           <input type="password" id="senha" name="password" placeholder="Senha" required class="rounded-input">
           </div>
-          <input type="submit" value="Login" class="button" />
+          <input type="submit" value="Login" class="button centralizarComPadding" />
         </form>
         <div class="section-fact"><p>Ainda não possui cadastro? <a href="/usuario/cadastrarUsuario">Cadastre-se</a>.</p></div>
       </div>
