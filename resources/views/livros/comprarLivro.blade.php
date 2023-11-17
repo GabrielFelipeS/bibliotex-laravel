@@ -41,18 +41,19 @@
     var_dump($_POST);
     var_dump($required);
     */
-    $ISBN = $required['ISBN'] ?? '';
-    $id = $required['id'] ?? '1';
+    $ISBN = $_GET['ISBN'] ?? '';
+    $id = $_GET['id'] ?? '1';
     $dadosDoLivro = Livro::where('ISBN', $ISBN)->first();
 
-    $mensagemBotao = $required['mensagemBotao'] ?? 'Efetuar Compra!';
-    $link = empty($required['link'])? 'ProcessamentoCadastrarCompra.php?ISBN='.$ISBN : $required['link'].$id.'&ISBN='.$ISBN;
+    $mensagemBotao = $_GET['mensagemBotao'] ?? 'Efetuar Compra!';
+    $link = empty($_GET['link'])? 'ProcessamentoCadastrarCompra.php?ISBN='.$ISBN : $_GET['link'].$id.'&ISBN='.$ISBN;
+    
     /*
-    echo '<br>' . $required['link'] . '<br>';
+    echo '<br>' . $_GET['link'] . '<br>';
     echo '<br>' . $link . '<br>';*/
 
-   if(isset($required['id'])) {
-        $titulo = $dadosDoLivro->nomeLivro ?? 'test';
+   if(isset($_GET['id'])) {
+        $titulo = $dadosDoLivro->nomeLivro;
         $compra = Compra::find($id);
         var_dump($_POST);
         $codigoVendedor = $compra->codVendedor;
@@ -67,37 +68,7 @@
 
 
 
-<?= $mylib->abertura_light(['titulo' => 'teste', 'id' => 'inserirLivros', 'descricao' => 'inserirLivros']) ?>
-
-    <?php 
-    //INICO- trecho de confirmação de exclusão
-        $mensagem = '';
-        if (isset($_SESSION['mensagem'])) {
-            $mensagem = "<p style='display: flex; color: red; justify-content: center;'><strong>".$_SESSION['mensagem']."</strong></p>";
-    
-            unset($_SESSION['mensagem']);
-        }
-        ?>
-    
-        <?php if ($mensagem): ?>
-            <div class="mensagem" id="mensagem">
-                <?= $mensagem ?>
-            </div>
-        <?php endif; ?>
-    
-        <script>
-        // Obtém a referência ao elemento da mensagem de erro
-        const mensagem = document.getElementById("mensagem");
-        // Define um intervalo de tempo em milissegundos (por exemplo, 5000ms = 5 segundos)
-        const tempoExibicao = 10000; // 4 segundos
-        // Função para ocultar a mensagem após o tempo definido
-        function ocultarMensagemErro() {
-            mensagem.style.display = "none"; // Oculta a mensagem de erro
-        }
-        // Configura o temporizador para chamar a função após o tempo definido
-        setTimeout(ocultarMensagemErro, tempoExibicao);
-        //FIM -trecho de confirmação de exclusão
-    </script>
+<?= $mylib->abertura_light(['titulo' => 'Comprando livro', 'id' => 'inserir Livros', 'descricao' => 'inserirLivros']) ?>
 
     <section>
         <div style="display: flex; justify-content: center; align-items: start;">

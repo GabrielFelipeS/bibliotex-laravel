@@ -337,7 +337,7 @@ class mylib extends Controller {
     function dados_do_livro($dadosDoLivro) {
         $html = '';
 
-        $html .= @$this->section_livros(['titulo' => $dadosDoLivro['nomeLivro'], 'paragrafo' => $dadosDoLivro['descricao'], 'imagem' => '/projeto/'.$dadosDoLivro['nome_da_foto'],'botao' => '<a href="comprarLivro.php?ISBN='.$dadosDoLivro['ISBN'].'"><button type="button" class="btn btn-primary">Comprar</button></a>', 'botao' => '']);
+        $html .= @$this->section_livros(['titulo' => $dadosDoLivro['nomeLivro'], 'paragrafo' => $dadosDoLivro['descricao'], 'imagem' => $dadosDoLivro['nomeDaFoto'],'botao' => '<a href="comprarLivro.php?ISBN='.$dadosDoLivro['ISBN'].'"><button type="button" class="btn btn-primary">Comprar</button></a>', 'botao' => '']);
 
         return $html;
     }
