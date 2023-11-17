@@ -72,19 +72,18 @@ class LivroControllerTest extends TestCase
         $controller = new LivroController;
 
         $requestData = [
-            'ISBN' => '2234567890', // Substitua pelos valores desejados
+            'ISBN' => '1234567890', // Substitua pelos valores desejados
             'valorLivro' => 19.99,
             'nomeLivro' => 'titulo do livro apos dar update',
             'descricao' => 'Descrição do Livro apos dar update',
             'nomeDaFoto' => 'foto.jpg',
-            'ISBNLivroEditar' => '1234567890',
         ];
         
         $request = new Request($requestData);
 
         $controller->update($request);
 
-        $livroSendoBuscado = $controller->find('2234567890');
+        $livroSendoBuscado = $controller->find('1234567890');
 
         $this->assertEquals('titulo do livro apos dar update', $livroSendoBuscado->nomeLivro);
     }
@@ -93,7 +92,7 @@ class LivroControllerTest extends TestCase
         $quantidadeAntesDeDeletar = Livro::count();
         $controller = new LivroController;
         $requestData = [
-            'ISBN' => '2234567890', // Substitua pelos valores desejados
+            'ISBN' => '1234567890', // Substitua pelos valores desejados
         ];
         
         $request = new Request($requestData);

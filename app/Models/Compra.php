@@ -11,4 +11,8 @@ class Compra extends Model
     protected $fillable = [
         'cpfComprador', 'iSBNLivro', 'codVendedor', 'valor', 'Cartao',
     ];
+
+    public function livro() {
+        return $this->belongsTo(Livro::class, 'ISBNLivro')->withDefault();
+    }   
 }

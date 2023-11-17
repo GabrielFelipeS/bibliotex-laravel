@@ -43,4 +43,5 @@ Route::get('/cadastrarExibirlivros', [LivroController::class, 'cadastrarExibirli
 Route::get('/excluirLivro', [LivroController::class, 'delete']);
 Route::get('/editarLivro', [LivroController::class, 'editar']);
 Route::post('/CadastrarLivro', [LivroController::class, 'store']);
+Route::post('/updateLivro', [LivroController::class, 'update']);
 

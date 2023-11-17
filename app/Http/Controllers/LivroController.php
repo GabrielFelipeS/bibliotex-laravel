@@ -42,19 +42,25 @@ class LivroController extends Controller
      * @return redireciona para uma página
      */
     public function update(Request $request) {
+        $ISBN = $request->ISBN;
+        $caminho = $this->caminhoImagem($ISBN);
+
+        if($caminho === 'media/'.$ISBN.'.') {
+            $caminho = Livro::where('ISBN', $ISBN)->first()->nomeDaFoto;
+        }
 
         DB::table('livros')
-            ->where('ISBN', $request->query('ISBNLivroEditar'))
+            ->where('ISBN',  $ISBN)
             ->limit(1)
             ->update([
-                'ISBN' => $request->ISBN,
+                'ISBN' => $ISBN,
                 'valorLivro' => $request->valorLivro,
                 'nomeLivro' => $request->nomeLivro,
                 'descricao' => $request->descricao,
-                'nomeDaFoto' => $request->nomeDaFoto,
+                'nomeDaFoto' => $caminho,
             ]);
 
-        return redirect('/')->with('message', 'Livro editado com sucesso');
+        return redirect('cadastrarExibirlivros')->with('message', 'Livro editado com sucesso');
     }
 
 
@@ -75,9 +81,9 @@ class LivroController extends Controller
             
             $livro->save();
             
-            return redirect('/')->with('message', 'Livro criado com sucesso');
+            return redirect('cadastrarExibirLivros')->with('message', 'Livro criado com sucesso');
         } else {
-            return redirect('/')->with('message', 'Livro já existe');
+            return redirect('cadastrarExibirlivros')->with('message', 'Livro já existe');
         }
     }
 
@@ -101,6 +107,7 @@ class LivroController extends Controller
         $ISBN = $request->ISBN;
         try {
             DB::table('livros')->where('ISBN', $ISBN)->delete();
+            
             return redirect('cadastrarExibirlivros')->with('msg', 'Livro deletado com sucesso!');
         } catch (Exception $e) {
             return redirect('cadastrarExibirlivros')->with('msg', 'Este livro não pode ser deletado!');
