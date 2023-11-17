@@ -65,7 +65,7 @@ class LivroController extends Controller
             $livro->valorLivro = $request->valorLivro;
             $livro->nomeLivro = $request->nomeLivro;
             $livro->descricao = $request->descricao;
-            $livro->nomeDaFoto = $request->nomeDaFoto;
+            $livro->nomeDaFoto = $this->caminhoImagem($request->ISBN);
             
             $livro->save();
             //return response()->json(['message' => 'Livro criado com sucesso'], 201);
@@ -73,7 +73,15 @@ class LivroController extends Controller
         } else {
             return redirect('/')->with('message', 'Livro já existe');
         }
-        
+    }
+
+    private function caminhoImagem($ISBN) {
+         $ext = strtolower(substr($_FILES['imagem']['name'],-4)); //Pegando extensão do arquivo
+        $new_name =  $ISBN .'.'.$ext; //Definindo um novo nome para o arquivo
+        $dir = './media/'; //Diretório para uploads, coloquei em lib pra facilitar o senhor achar
+        move_uploaded_file($_FILES['imagem']['tmp_name'], $dir.$new_name); //Fazer upload do arquivo 
+        $caminho = 'media/'.$new_name;
+        return $caminho;
     }
 
     /**

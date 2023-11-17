@@ -64,10 +64,6 @@
 
 ?>
 
-
-
-
-
 <?= $mylib->abertura_light(['titulo' => 'Comprando livro', 'id' => 'inserir Livros', 'descricao' => 'inserirLivros']) ?>
 
     <section>
