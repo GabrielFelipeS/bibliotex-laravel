@@ -18,7 +18,6 @@ class ComprasControllerTest extends TestCase
         $requestData = [
             'id' => 100,
             'cpfComprador' => '1234567891233',
-            'ISBNLivro' => '001',
             'ISBN' => '001',
             'codVendedor' => 1,
             'cartao' => '1234-5119',
