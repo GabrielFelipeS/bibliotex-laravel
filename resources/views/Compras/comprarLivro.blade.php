@@ -2,7 +2,10 @@
     use App\Models\Compra;
     use App\Models\Livro;
     use App\Http\Controllers\Mylib;
+    //use App\Http\Controllers\LivroController;
     $mylib = new Mylib;
+    //$livroController = new LivroController;
+    //$livro = $livroController->find($_GET['ISBN']);
     
 
 ?>
@@ -41,12 +44,13 @@
     var_dump($_POST);
     var_dump($required);
     */
+    
     $ISBN = $_GET['ISBN'] ?? '';
     $id = $_GET['id'] ?? '1';
     $dadosDoLivro = Livro::where('ISBN', $ISBN)->first();
 
     $mensagemBotao = $_GET['mensagemBotao'] ?? 'Efetuar Compra!';
-    $link = empty($_GET['link'])? 'ProcessamentoCadastrarCompra.php?ISBN='.$ISBN : $_GET['link'].$id.'&ISBN='.$ISBN;
+    $link = empty($_GET['link'])? '?ISBN='.$ISBN : $_GET['link'].$id.'&ISBN='.$ISBN;
     
     /*
     echo '<br>' . $_GET['link'] . '<br>';
@@ -75,10 +79,11 @@
         </div>
         <div class="section-contact">
             <!-- ./inc/salvarAlteracoes.php?ISBN=<#?=$required['ISBN']?> -->
-                <form method="POST" enctype="multipart/form-data" action="../controller/<?=$link?>">
+                <form method="POST" enctype="multipart/form-data" action="/comprarLivro<?=$link?>">
+                @csrf
                     <div class="section-contact--split">
-                        <input type="text" value="" placeholder="CODIGO DO VENDEDOR" required />
-                        <input type="text" value="" name="cpf" placeholder="CPF" required />
+                        <input type="text" name = "codVendedor" value="" placeholder="CODIGO DO VENDEDOR" required />
+                        <input type="text" value="" name="cpfComprador" placeholder="CPF" required />
                     </div>
                     <div class="section-contact--split">
                         <input type="text" name="quantidade" value="" placeholder="QUANTIDADE" required/>

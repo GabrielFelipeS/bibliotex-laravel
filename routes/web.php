@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LivroController;
+use App\Http\Controllers\CompraController;
 use App\Http\Controllers\mylib;
 
 Route::get('/', [UserController::class, 'index']);
@@ -34,10 +35,7 @@ Route::any('usuario/login', function () {
 })->middleware('guest');
 
 
-//Teste
-Route::get('/comprarLivro', function () {
-    return view('livros/comprarLivro');
-});
+
 
 Route::get('/cadastrarExibirlivros', [LivroController::class, 'cadastrarExibirlivros']);
 Route::get('/excluirLivro', [LivroController::class, 'delete']);
@@ -45,3 +43,5 @@ Route::get('/editarLivro', [LivroController::class, 'editar']);
 Route::post('/CadastrarLivro', [LivroController::class, 'store']);
 Route::post('/updateLivro', [LivroController::class, 'update']);
 
+Route::get('/comprarLivro', [CompraController::class, 'exibirComprarLivro']);
+Route::post('/comprarLivro', [CompraController::class, 'store']);
