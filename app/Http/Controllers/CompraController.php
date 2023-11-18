@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Compra;
@@ -12,7 +12,12 @@ use App\Http\Controllers\Mylib;
 class CompraController extends Controller
 {
     function exibirComprarlivro() {
-        return view('Compras.comprarLivro');
+        if (Auth::guest()){
+            return redirect('/')->with('msg', 'Faça login para comprar');
+        }else{
+            return view('Compras.comprarLivro');
+        }
+        
     }
 
     public function find($id) {

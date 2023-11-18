@@ -44,4 +44,4 @@ Route::post('/CadastrarLivro', [LivroController::class, 'store']);
 Route::post('/updateLivro', [LivroController::class, 'update']);
 
 Route::get('/comprarLivro', [CompraController::class, 'exibirComprarLivro']);
-Route::post('/comprarLivro', [CompraController::class, 'store']);
+Route::post('/comprarLivro', [CompraController::class, 'store'])->middleware('auth');
