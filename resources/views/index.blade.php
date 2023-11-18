@@ -109,8 +109,11 @@
         </section>
 
         <?= $mylib->abertura_light(['titulo' => 'Os livros', 'descricao' => 'Podem te levar a qualquer lugar do mundo', 'id' => 'premium']) ?>     
+
         <div style="color: white;"><?php include './inc/appearance/carrosel.php'; ?> </div>     
+        
         </div>
+
         </section>
 
         <?= $mylib->abertura_dark(['titulo' => 'Detalhes', 'descricao' => 'Sobre nossa empresa', 'id' => 'Detalhes']) ?>

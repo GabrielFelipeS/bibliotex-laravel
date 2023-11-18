@@ -60,7 +60,7 @@ class LivroController extends Controller
                 'nomeDaFoto' => $caminho,
             ]);
 
-        return redirect('cadastrarExibirlivros')->with('message', 'Livro editado com sucesso');
+        return redirect('cadastrarExibirlivros')->with('msg', 'Livro editado com sucesso');
     }
 
 

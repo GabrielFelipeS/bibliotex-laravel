@@ -90,6 +90,9 @@ class LivroControllerTest extends TestCase
 
     public function test_delete() {
         $quantidadeAntesDeDeletar = Livro::count();
+
+        
+
         $controller = new LivroController;
         $requestData = [
             'ISBN' => '1234567890', // Substitua pelos valores desejados

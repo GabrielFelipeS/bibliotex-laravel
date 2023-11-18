@@ -37,6 +37,8 @@
             </div>
         </div>
     </footer>
+
+   <?php include './inc/appearance/rodape.php' ?>
 </body>
 </html>
  
