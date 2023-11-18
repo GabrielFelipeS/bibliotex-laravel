@@ -7,17 +7,24 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Compra;
 use App\Models\Livro;
 use App\Http\Controllers\Mylib;
-
+use App\Models\Vendedor;
 
 class CompraController extends Controller
 {
     function exibirComprarlivro() {
         if (Auth::guest()){
             return redirect('/')->with('msg', 'Faça login para comprar');
-        }else{
-            return view('Compras.comprarLivro');
         }
-        
+
+        if(!request('ISBN')) {
+            return redirect('/')->with('msg', 'É necessario passar o ISBN do livro');
+        }
+
+        if(!Livro::where('ISBN', request('ISBN'))->first()) {
+            return redirect('/')->with('msg', 'Livro não encontrado');
+        }
+
+        return view('Compras.comprarLivro');
     }
 
     public function find($id) {
@@ -35,12 +42,14 @@ class CompraController extends Controller
             $compra->id = $request->id;
             $compra->cpfComprador = $request->cpfComprador;
             $compra->ISBNLivro = $request->query('ISBN');
+
+            if(!Vendedor::where('codigo_vendedor', $request->codVendedor)->first()) {
+                return redirect('/comprarLivro?ISBN='.$request->query('ISBN'))->with('msg', 'Vendedor não encontrado');
+            }
             $compra->codVendedor = $request->codVendedor;
 
-            
-            $mylib = new Mylib;
             $dadosDoLivro = Livro::where('ISBN', $request->query('ISBN'))->first();            
-            $mylib->dados_do_livro($dadosDoLivro);
+
             $compra->valor = $dadosDoLivro->valorLivro;
             $compra->cartao = $request->cartao;
             $compra->save();
