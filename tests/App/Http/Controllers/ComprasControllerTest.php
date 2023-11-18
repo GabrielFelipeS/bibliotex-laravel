@@ -19,8 +19,8 @@ class ComprasControllerTest extends TestCase
             'id' => 100,
             'cpfComprador' => '1234567891233',
             'ISBNLivro' => '001',
+            'ISBN' => '001',
             'codVendedor' => 1,
-            'valor' => 50,
             'cartao' => '1234-5119',
         ];
 
