@@ -15,7 +15,7 @@
             <?php 
             
             if(Auth::check() && Auth::user()->role === 'admin') {?> 
-                <li><a href="/projeto/inc/view/cadastrarExibirlivros.php">Editar/Excluir livros</a></li>
+                <li><a href="/cadastrarExibirlivros">Editar/Excluir livros</a></li>
                 <li><a href="/projeto/inc/view/cadastrar_vendedor.php">Editar/Excluir funcionarios</a></li>
                 <li><a href="/projeto/inc/view/exibirCompras.php">Vendas</a></li>
 
