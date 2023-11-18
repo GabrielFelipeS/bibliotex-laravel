@@ -3,12 +3,13 @@
     use App\Models\Livro;
     use App\Http\Controllers\Mylib;
     use App\Http\Controllers\CompraController;
+    use App\Http\Controllers\LivroController;
     $mylib = new Mylib;
-    $compraControler = new CompraController;
-    $vendas = $compraControler->findAll();
-    $livroController = new LivroController;
-    $livro = $livroController->find($_GET['ISBN']);
-
+    $compra = new CompraController;
+    $vendas = $compra->findAll();
+    $livro = new Livro;
+    //$livro = Livro::where('ISBN', $ISBN)->first();
+  
 ?>
 
 @extends('layouts.mainComFooter')
@@ -75,25 +76,27 @@
         </tr>
       </thead>
       <tbody>
-        <?php foreach ($vendas as $venda) { 
-            $condicao = $venda['ISBNlivro'];    
-            $livro = get('livros', "ISBN =  $condicao");
-            $quantidade = $venda['valor']/$livro['valorLivro']; ?>
+      @foreach ($vendas as $venda) 
+       <?php
+            $condicao = $venda->ISBNlivro;    
+            $livro =  Livro::where('ISBN', $venda->ISBNLivro)->first();
+            $quantidade = $venda->valor/$livro->valorLivro;
+        ?>
           <tr>
-            <td><?php echo $venda['codVendedor']; ?></td>
-            <td><?php echo $venda['ISBNlivro']; ?></td>
-            <td><?php echo $livro['nomeLivro']; ?></td>
-            <td><?php echo $venda['cpfComprador']; ?></td>
-            <td><?php echo $quantidade; ?></td>
-            <td><?php echo $venda['valor']; ?></td>
-            <td>
-                <a href="/projeto/inc/controller/excluirCompra.php?id=<?= $venda['id']; ?>"><button type="button" class="btn btn-primary" style="background-color: black; border-color: black; margin-right: 25px;"><img style="width: 30px;  filter: invert(1);" src="/projeto/assets/images/excluir.png" alt="excluir" ></button></a> 
+            <td>{{ $venda->codVendedor}}</td>
+            <td>{{ $venda->ISBNLivro}}</td>
+            <td>{{ $livro->nomeLivro}}</td>
+            <td>{{ $venda->cpfComprador}}</td>
+            <td>{{ $quantidade }}</td>
+            <td> R$ <?= number_format($venda->valor, 2, ',', ' ');?></td>
+            <td> 
+                <a href="/apagarCompra/{{ $venda->id }}"><button type="button" class="btn btn-primary" style="background-color: black; border-color: black; margin-right: 25px;"><img style="width: 30px;  filter: invert(1);" src="/images/excluir.png" alt="excluir" ></button></a> 
             </td>
             <td>      
-                <a href="/projeto/inc/view/cadastrarCompra.php?ISBN=<?= $venda['ISBNlivro'].'&id='.$venda['id'].'&titulo='.'Editando o livro'.'&mensagemBotao=Editar Compra!'.'&link='.'salvarCompra.php?id='?>"><button type="button" class="btn btn-primary" style="background-color: black; border-color: black;"><img style="width: 30px; filter: invert(1);" src="/projeto/assets/images/editar.png" alt="editar"></button></a>           
+                <a href="/projeto/inc/view/cadastrarCompra.php?ISBN=<?= $venda['ISBNlivro'].'&id='.$venda['id'].'&titulo='.'Editando o livro'.'&mensagemBotao=Editar Compra!'.'&link='.'salvarCompra.php?id='?>"><button type="button" class="btn btn-primary" style="background-color: black; border-color: black;"><img style="width: 30px; filter: invert(1);" src="/images/editar.png" alt="editar"></button></a>           
             </td>
           </tr>
-        <?php } ?>
+        @endforeach
       </tbody>
     </table>
   </div>

@@ -27,6 +27,10 @@ class CompraController extends Controller
         return view('Compras.comprarLivro');
     }
 
+    function exibirCompras() {
+        return view('Compras.exibirCompras');
+    }
+
     public function find($id) {
         $compra = Compra::find($id);
         return $compra;
@@ -74,5 +78,8 @@ class CompraController extends Controller
             ->where('id', $id)
             ->limit(1)
             ->delete();
+            return redirect('/exibirCompras')->with('msg', 'Venda apagada com sucesso!');
+
+
     }
 }

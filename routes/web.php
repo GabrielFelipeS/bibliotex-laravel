@@ -45,3 +45,12 @@ Route::post('/updateLivro', [LivroController::class, 'update']);
 
 Route::get('/comprarLivro', [CompraController::class, 'exibirComprarLivro'])->name('comprar');
 Route::post('/comprarLivro', [CompraController::class, 'store'])->middleware('auth');
+
+Route::get('/exibirCompras', [CompraController::class, 'exibirCompras'])->middleware('auth');
+Route::get('/apagarCompra/{id}', [CompraController::class, 'delete'])->middleware('auth');
+
+
+
+Route::get('/teste', function () {
+    return view('Compras/exibirCompras');
+});
