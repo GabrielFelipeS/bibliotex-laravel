@@ -33,6 +33,15 @@ class LivroController extends Controller
     }
 
     public function editar() {
+        
+        if(!request('ISBN')) {
+            return redirect('/')->with('msg', 'É necessario passar o ISBN do livro');
+        }
+
+        if(!Livro::where('ISBN', request('ISBN'))->first()) {
+            return redirect('/')->with('msg', 'Livro não encontrado');
+        }
+
         return view('livros.editarLivro');
     }
 
