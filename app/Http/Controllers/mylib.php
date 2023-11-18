@@ -30,7 +30,7 @@ class mylib extends Controller {
         $this->wline($myfile, $_POST['message']);
         $this->wline($myfile, $new_name);
 
-        return redirect('/');
+        return redirect('/#Sugestoes')->with('mensagemSugestao', 'Sugestão enviada!');;
     }
 
 

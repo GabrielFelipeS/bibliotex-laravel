@@ -184,47 +184,16 @@
         </section>
 
 
+        @if(session('mensagemSugestao'))
+            <p class="msg" id="mensagem"  style="background-color: #F7F7F7; border-color: #F7F7F7; color: black;">{{ session('mensagemSugestao') }}</p>
+            <script id="script" src="./js/deletarMensagem.js"></script>
+        @endif
 
     @auth
         <?=  $mylib->abertura_light(['titulo' => 'Sugestões', 'descricao' => 'Deixe sua sugestão aqui', 'id' => 'Sugestoes'])?>
         
 
-        <?php
-            $mensagemSugestao = '';      
-        
-            if (isset($_SESSION['mensagemSugestao'])):
-                $mensagemSugestao = "<p style='display: flex; color: green; justify-content: center;'><strong>Sugestao recebida.</strong></p>";
-                unset($_SESSION['mensagemSugestao']);
-            
-            ?>
-            <?php if ($mensagemSugestao): ?>
-                <div class="sugestao-mensagem" id="sugestaoMensagem">
-                    <?= $mensagemSugestao ?>
-                </div>
-            <?php endif; ?>
-        
-            <script id="script">
-                // Obtém a referência ao elemento da mensagem de erro
-                //mensagem = document.getElementById("sugestaoMensagem");
-                // Define um intervalo de tempo em milissegundos (por exemplo, 5000ms = 5 segundos)
-                tempoExibicao = 10000; // 4 segundos
-                // Função para ocultar a mensagem após o tempo definido
-                function deletaMensagem() {
-                    var node = document.getElementById("sugestaoMensagem");
-                    if (node.parentNode) {
-                        node.parentNode.removeChild(node);
-                    }
-
-                    var node = document.getElementById("script");
-                    if (node.parentNode) {
-                        node.parentNode.removeChild(node);
-                    }
-                }
-                // Configura o temporizador para chamar a função após o tempo definido
-                setTimeout(deletaMensagem, tempoExibicao);
-                //FIM -trecho de confirmação de exclusão
-            </script>
-        <?php endif; ?>
+ 
         
 
         <div class="section-contact" id='sugestoes'>
