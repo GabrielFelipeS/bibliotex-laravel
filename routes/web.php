@@ -49,8 +49,10 @@ Route::post('/comprarLivro', [CompraController::class, 'store'])->middleware('au
 Route::get('/exibirCompras', [CompraController::class, 'exibirCompras'])->middleware('auth');
 Route::get('/apagarCompra/{id}', [CompraController::class, 'delete'])->middleware('auth');
 
+Route::get('/editarVenda', [CompraController::class, 'exibirEditarVendas'])->middleware('auth');
+Route::post('/editarVendaUp', [CompraController::class, 'update'])->middleware('auth');
 
 
-Route::get('/teste', function () {
-    return view('Compras/exibirCompras');
-});
+/*Route::get('/teste/{id}', function () {
+    return view('Compras/editarVenda');
+});*/

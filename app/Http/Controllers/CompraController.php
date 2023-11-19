@@ -61,16 +61,28 @@ class CompraController extends Controller
             return redirect('/')->with('msg', 'Livro comprado com sucesso!');
     }
 
+    function exibirEditarVendas() {
+        return view('Compras.editarVenda');
+    }
+
+
     public function update(Request $request) {
+
+        $compra = Compra::find($request->id);
         DB::table('compras')
+        
             ->where('id', $request->id)
+
+            
             ->update([
                 'cpfComprador' =>  $request->cpfComprador,
-                'ISBNLivro' => $request->ISBNLivro,
+                'ISBNLivro' => $compra->ISBNLivro,
                 'codVendedor' => $request->codVendedor,
-                'valor' => $request->valor,
+                'valor' => $compra->valor * $request->quantidade,
                 'cartao' => $request->cartao,
             ]);
+            
+            return redirect('/exibirCompras')->with('msg', 'Venda editada com sucesso!');
     }
 
     public function delete($id) {
