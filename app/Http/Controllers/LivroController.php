@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Livro;
 use Exception;
@@ -33,6 +34,9 @@ class LivroController extends Controller
     }
 
     public function editar() {
+        if(Auth::user()->role === 'comum') {
+            return redirect('/')->with('msg', 'Você não tem permissão para acessar essa página');
+        }
         
         if(!request('ISBN')) {
             return redirect('/')->with('msg', 'É necessario passar o ISBN do livro');
@@ -113,6 +117,10 @@ class LivroController extends Controller
      * @return redireciona a pagina
      */
     public function delete(Request $request) {
+        if(Auth::user()->role === 'comum') {
+            return redirect('/')->with('msg', 'Você não tem permissão para acessar essa página');
+        }
+
         $ISBN = $request->ISBN;
         try {
             DB::table('livros')->where('ISBN', $ISBN)->delete();
