@@ -69,16 +69,14 @@ class CompraController extends Controller
     public function update(Request $request) {
 
         $compra = Compra::find($request->id);
+        $livro = Livro::where('ISBN', $compra->ISBNLivro)->first();
         DB::table('compras')
-        
             ->where('id', $request->id)
-
-            
             ->update([
                 'cpfComprador' =>  $request->cpfComprador,
                 'ISBNLivro' => $compra->ISBNLivro,
                 'codVendedor' => $request->codVendedor,
-                'valor' => $compra->valor * $request->quantidade,
+                'valor' => $livro->valorLivro * $request->quantidade,
                 'cartao' => $request->cartao,
             ]);
             

@@ -50,10 +50,9 @@ class ComprasControllerTest extends TestCase
         $requestData = [
             'id' => 100,
             'cpfComprador' => '1234567891233',
-            'ISBNLivro' => '001',
             'codVendedor' => 1,
-            'valor' => 50,
             'cartao' => '1234-5119',
+            'quantidade' => 2,
         ];
 
         $request = new Request($requestData);
@@ -62,6 +61,7 @@ class ComprasControllerTest extends TestCase
         $compra = $controller->find(100);
 
         $this->assertEquals('1234567891233', $compra->cpfComprador);
+        $this->assertEquals(50, $compra->valor);
     }
 
     public function test_delete() {
