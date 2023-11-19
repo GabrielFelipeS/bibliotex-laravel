@@ -47,7 +47,7 @@ class UserController extends Controller
         
         $usuario->save();
 
-        return redirect('/')->with('msg', 'Cadastro realizado');
+        return redirect('/login')->with('msg', 'Cadastro realizado');
     }
 
     public function login(Request $request){        
@@ -57,7 +57,7 @@ class UserController extends Controller
         if (Auth::attempt(['email' => $email, 'password' => $password])) {
             return redirect('/')->with('msg', 'Login realizado com sucesso');
         } else {
-            return redirect('/')->with('msg', 'E-mail ou senha inválidos');
+            return redirect('/login')->with('msg', 'E-mail ou senha inválidos');
         }
     }
 

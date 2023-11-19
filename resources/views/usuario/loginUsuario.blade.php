@@ -54,10 +54,6 @@
   }
 </style>
 
-  @if(session('msg'))
-    <p class="msg">{{ session('msg') }}</p>
-  @endif
-
 <div class="container">
       <div class="login-form">
       <form method="POST" action="/login">
