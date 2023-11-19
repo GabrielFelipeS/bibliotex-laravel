@@ -28,6 +28,10 @@ class CompraController extends Controller
     }
 
     function exibirCompras() {
+        if(Auth::user()->role === 'comum') {
+            return redirect('/')->with('msg', session('msg') ?? 'Você não tem permissão para acessar essa página');
+        }
+        
         return view('Compras.exibirCompras');
     }
 
@@ -57,8 +61,7 @@ class CompraController extends Controller
             $compra->valor = $dadosDoLivro->valorLivro;
             $compra->cartao = $request->cartao;
             $compra->save();
-            //return response()->json(['message' => 'Livro criado com sucesso'], 201);
-            return redirect('/')->with('msg', 'Livro comprado com sucesso!');
+            return redirect('/exibirCompras')->with('msg', 'Livro comprado com sucesso!');
     }
 
     function exibirEditarVendas() {
