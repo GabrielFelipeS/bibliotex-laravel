@@ -31,7 +31,7 @@ class CompraController extends Controller
         if(Auth::user()->role === 'comum') {
             return redirect('/')->with('msg', session('msg') ?? 'Você não tem permissão para acessar essa página');
         }
-        
+
         return view('Compras.exibirCompras');
     }
 
@@ -65,6 +65,10 @@ class CompraController extends Controller
     }
 
     function exibirEditarVendas() {
+        if(Auth::user()->role === 'comum') {
+            return redirect('/')->with('msg', 'Você não tem permissão para acessar essa página');
+        }
+
         return view('Compras.editarVenda');
     }
 
@@ -87,6 +91,10 @@ class CompraController extends Controller
     }
 
     public function delete($id) {
+        if(Auth::user()->role === 'comum') {
+            return redirect('/')->with('msg', 'Você não tem permissão para fazer isso');
+        }
+
         DB::table('compras')
             ->where('id', $id)
             ->limit(1)
