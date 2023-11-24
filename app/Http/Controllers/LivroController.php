@@ -15,7 +15,6 @@ class LivroController extends Controller
         return view('livros.cadastrarExibirLivros');
     }
 
-
       /**
      *  @param ISBN : Informarma o ISBN do livro
      * @return livro : retorna o livro encontrado

@@ -16,6 +16,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\LivroController;
 use App\Http\Controllers\CompraController;
 use App\Http\Controllers\mylib;
+use App\Http\Controllers\VendedorController;
+
 
 Route::get('/', [UserController::class, 'index']);
 Route::post('/', [UserController::class, 'index']);
@@ -35,6 +37,9 @@ Route::any('usuario/login', function () {
 })->middleware('guest');
 
 
+Route::get('/cadastrarvendedor', function () {
+    return view('Vendedor/cadastrarvendedor');
+})->middleware('guest');
 
 
 Route::get('/cadastrarExibirlivros', [LivroController::class, 'cadastrarExibirlivros']);
@@ -51,6 +56,13 @@ Route::get('/apagarCompra/{id}', [CompraController::class, 'delete'])->middlewar
 
 Route::get('/editarVenda', [CompraController::class, 'exibirEditarVendas'])->middleware('auth');
 Route::post('/editarVendaUp', [CompraController::class, 'update'])->middleware('auth');
+
+Route::get('/cadastrarvendedor', [VendedorController::class, 'cadastrarvendedor']);
+Route::delete('/excluirvendedor', [VendedorController::class, 'destroy']);
+Route::post('/updatevendedor', [VendedorController::class, 'update']);
+Route::post('/cadastrarvendedor', [VendedorController::class, 'store'])->name('vendedor.store');
+Route::get('/editarvendedor', [VendedorController::class, 'editar']);
+
 
 
 /*Route::get('/teste/{id}', function () {

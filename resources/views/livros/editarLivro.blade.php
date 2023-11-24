@@ -1,17 +1,13 @@
 @extends('layouts.mainComFooter')
-
 @section('title', 'Blibiotex')
-
 @section('content')
 <?php
-
 use App\Http\Controllers\LivroController;
 use App\Http\Controllers\mylib;
 
 $livroController = new LivroController;
 $mylib = new mylib;
 $livro = $livroController->find($_GET['ISBN']);
-
 
 ?>
 <style>
