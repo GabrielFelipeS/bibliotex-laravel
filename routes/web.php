@@ -59,7 +59,7 @@ Route::post('/editarVendaUp', [CompraController::class, 'update'])->middleware('
 
 Route::get('/cadastrarvendedor', [VendedorController::class, 'cadastrarvendedor']);
 Route::get('/excluirvendedor', [VendedorController::class, 'delete']);
-Route::post('/updatevendedor', [VendedorController::class, 'update']);
+Route::post('/updatevendedor', [VendedorController::class, 'update'])->name('vendedor.update');;
 Route::post('/cadastrarvendedor', [VendedorController::class, 'store'])->name('vendedor.store');
 Route::get('/editarvendedor', [VendedorController::class, 'editar']);
 

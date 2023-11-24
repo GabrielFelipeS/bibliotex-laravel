@@ -91,7 +91,7 @@ class VendedorControllerTest extends TestCase
         $quantidadeDeVendoresAntesDeDeletar = Vendedor::count();
         $controller = new VendedorController;
         
-        $controller->destroy('49960658028');
+        $controller->destroy(5);
 
         $quantidadeDeVendoresAgora = Vendedor::count();
         $this->assertNotEquals($quantidadeDeVendoresAntesDeDeletar, $quantidadeDeVendoresAgora);

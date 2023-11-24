@@ -43,7 +43,6 @@ class VendedorController extends Controller
      * @return redireciona para uma página
      */
    public function update(Request $request) {
-    $cpf = $request->cpf;
 
        DB::table('vendedores')
            ->where('cpf', $request->cpf)
@@ -55,7 +54,7 @@ class VendedorController extends Controller
                'nacionalidade' => $request->nacionalidade,
            ]);
 
-       return redirect('/editarvendedor')->with('Vendedor deltado com sucesso!');
+       return redirect('/cadastrarvendedor')->with('Vendedor deltado com sucesso!');
    }
  /**
      *  @param post $request : Informações para cadastrar 

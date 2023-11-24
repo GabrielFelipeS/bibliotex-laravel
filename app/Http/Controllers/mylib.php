@@ -339,7 +339,7 @@ class mylib extends Controller {
 
                     '</br><a href="/excluirvendedor?cod='.$vendedor['codigo_vendedor'].'"><button type="button" class="btn btn-primary" style="background-color: black; border-color: black; margin-top: 20px;"><img style="width: 30px; filter: invert(1);"" src="/assets/images/excluir.png" alt="excluir" ></button></a>  
 
-                    <a href="../view/editarVendedor.php?cod='.$vendedor['codigo_vendedor'].'"><button type="button" class="btn btn-primary" style="background-color: black; border-color: black; margin-top: 20px;"><img style="width: 30px; filter: invert(1);" src="/assets/images/editar.png" alt="editar"></button></a>'."</div>";
+                    <a href="/editarvendedor?cod='.$vendedor['codigo_vendedor'].'"><button type="button" class="btn btn-primary" style="background-color: black; border-color: black; margin-top: 20px;"><img style="width: 30px; filter: invert(1);" src="/assets/images/editar.png" alt="editar"></button></a>'."</div>";
         }
         echo $html;
     }
