@@ -58,7 +58,7 @@ Route::get('/editarVenda', [CompraController::class, 'exibirEditarVendas'])->mid
 Route::post('/editarVendaUp', [CompraController::class, 'update'])->middleware('auth');
 
 Route::get('/cadastrarvendedor', [VendedorController::class, 'cadastrarvendedor']);
-Route::delete('/excluirvendedor', [VendedorController::class, 'destroy']);
+Route::get('/excluirvendedor', [VendedorController::class, 'delete']);
 Route::post('/updatevendedor', [VendedorController::class, 'update']);
 Route::post('/cadastrarvendedor', [VendedorController::class, 'store'])->name('vendedor.store');
 Route::get('/editarvendedor', [VendedorController::class, 'editar']);

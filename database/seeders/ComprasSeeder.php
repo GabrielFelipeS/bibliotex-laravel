@@ -44,7 +44,7 @@ class ComprasSeeder extends Seeder
     Compra::create([
         'cpfComprador' => '246579158228',
         'ISBNLivro' => '006',
-        'codVendedor' => 3,
+        'codVendedor' => 2,
         'valor' => 47,
         'cartao' => '1234-5699',
     ]);
@@ -62,7 +62,7 @@ class ComprasSeeder extends Seeder
     Compra::create([
         'cpfComprador' => '46125781212',
         'ISBNLivro' => '005',
-        'codVendedor' => 3,
+        'codVendedor' => 2,
         'valor' => 45,
         'cartao' => '1234-1234',
     ]);

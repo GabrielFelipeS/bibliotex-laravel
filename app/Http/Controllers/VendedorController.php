@@ -94,18 +94,31 @@ class VendedorController extends Controller
      * @return vendedores | Retorna todos os vendedores 
      */
    
+
     /**
      * @param cpf | Cpf do vendedor a ser deletado
      * @return null | redireciona a pagina
      */
-    public function destroy($cpf) {
+    public function delete(Request $request) {
 
-        Event::findOrFail($cpf)->delete();
+        $cod = $request->query('cod');
+
+        $vendedor = Vendedor::where("codigo_vendedor", $cod)->first();
+        $controller = new EnderecoController;
+        $controller->delete($vendedor->cpf);
+
+        $this->destroy($cod);
+        return redirect('/cadastrarvendedor')->with('msg', 'Vendedor deletado com sucesso!');
+    }
+
+    /**
+     * @param cpf | Cpf do vendedor a ser deletado
+     * @return null | redireciona a pagina
+     */
+    public function destroy($id) {
         DB::table('vendedores')
-            ->where('cpf', $cpf)
+            ->where('codigo_vendedor', $id)
             ->delete();
-
-        return redirect('/')->with('msg', 'Vendedor deletado com sucesso!');
     }
     
 

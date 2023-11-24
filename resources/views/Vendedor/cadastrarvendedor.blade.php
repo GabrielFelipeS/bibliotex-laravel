@@ -5,9 +5,36 @@
 @section('content')
     <?php 
         use App\Http\Controllers\Mylib;
+        use Illuminate\Support\Facades\Auth;
         $mylib = new Mylib;
     ?>
+    <style>
+    body {
+        background-color: black;
+    }
 
+    .centralizar{
+        width:100vw;
+        max-width:1140px;
+        margin-top:20px;
+        display:flex;
+        flex-wrap:wrap;
+        justify-content:space-around;
+    }
+    .space {
+        margin-top: 20px;
+        margin-right: 20px;
+    }
+</style>
+
+    <?php if(Auth::check() && Auth::user()->role === 'admin') { ?>
+        <?= $mylib->abertura_light(['titulo' => 'Funcionarios', 'id' => 'JaCadastrados']) ?>
+            <div class="centralizar">
+                <?= $mylib->carregarfunc(); ?>
+            </div>
+        </div>
+        </section>
+    <?php }?>
 
     <?= $mylib->abertura_dark(['titulo' => 'Cadastrar funcionario', 'id' => 'JaCadastrados']) ?>
     <div class="section-contact">

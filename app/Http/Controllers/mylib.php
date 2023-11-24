@@ -337,9 +337,9 @@ class mylib extends Controller {
                     "Data de nascimento: ".$vendedor['data_de_nascimento']."</br>".
                     "Nacionalidade: ".$vendedor['nacionalidade'].
 
-                    '</br><a href="../controller/excluirVendedor.php?cod='.$vendedor['codigo_vendedor'].'"><button type="button" class="btn btn-primary" style="background-color: black; border-color: black; margin-top: 20px;"><img style="width: 30px; filter: invert(1);"" src="/projeto/assets/images/excluir.png" alt="excluir" ></button></a>  
+                    '</br><a href="/excluirvendedor?cod='.$vendedor['codigo_vendedor'].'"><button type="button" class="btn btn-primary" style="background-color: black; border-color: black; margin-top: 20px;"><img style="width: 30px; filter: invert(1);"" src="/assets/images/excluir.png" alt="excluir" ></button></a>  
 
-                    <a href="../view/editarVendedor.php?cod='.$vendedor['codigo_vendedor'].'"><button type="button" class="btn btn-primary" style="background-color: black; border-color: black; margin-top: 20px;"><img style="width: 30px; filter: invert(1);" src="/projeto/assets/images/editar.png" alt="editar"></button></a>'."</div>";
+                    <a href="../view/editarVendedor.php?cod='.$vendedor['codigo_vendedor'].'"><button type="button" class="btn btn-primary" style="background-color: black; border-color: black; margin-top: 20px;"><img style="width: 30px; filter: invert(1);" src="/assets/images/editar.png" alt="editar"></button></a>'."</div>";
         }
         echo $html;
     }
