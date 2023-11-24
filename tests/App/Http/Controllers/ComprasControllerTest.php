@@ -5,7 +5,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Controllers\CompraController;
 use App\Models\Compra;
-
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Tests\TestCase;
 
 
@@ -68,6 +69,12 @@ class ComprasControllerTest extends TestCase
         $quantidadeDeVendoresAntesDeDeletar = Compra::count();
         $controller = new CompraController;
         
+        $user = new User;
+        $user->login = "admin@admin.com";
+        $user->senha = "123456";
+        $user->role = "admin";
+        Auth::login($user);
+
         $controller->delete(100);
 
         $quantidadeDeVendoresAgora = Compra::count();

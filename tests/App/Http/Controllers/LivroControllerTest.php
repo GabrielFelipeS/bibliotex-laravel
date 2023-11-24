@@ -5,8 +5,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Controllers\LivroController;
 use App\Models\Livro;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Tests\TestCase;
 
 class LivroControllerTest extends TestCase
@@ -98,6 +98,12 @@ class LivroControllerTest extends TestCase
             'ISBN' => '1234567890', // Substitua pelos valores desejados
         ];
         
+        $user = new User;
+        $user->login = "admin@admin.com";
+        $user->senha = "123456";
+        $user->role = "admin";
+        Auth::login($user);
+
         $request = new Request($requestData);
         $controller->delete($request);
 
