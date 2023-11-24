@@ -7,7 +7,6 @@
 
         $vendedorController = new VendedorController;
         $mylib = new Mylib;
-        $vendedor = $vendedorController->find($_GET['cpf']);
 
     ?>
     <?= $mylib->abertura_light(['titulo' => 'funcionarios', 'id' => 'JaCadastrados']) ?>
