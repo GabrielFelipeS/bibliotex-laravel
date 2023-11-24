@@ -15,10 +15,9 @@
         $enderecoController = new EnderecoController;
         $endereco = $enderecoController->find($vendedor->cpf);
     ?>
-    <?= $mylib->abertura_light(['titulo' => 'funcionarios', 'id' => 'JaCadastrados']) ?>
 
 
-    <?= $mylib->abertura_dark(['titulo' => 'Gostaria de inserir um funcionario?', 'id' => 'JaCadastrados']) ?>
+    <?= $mylib->abertura_dark(['titulo' => 'Gostaria de editar esse funcionário?', 'id' => 'JaCadastrados']) ?>
     <div class="section-contact">
         <form method="POST" enctype="multipart/form-data" action="{{ route('vendedor.update') }}">
             @csrf
@@ -49,7 +48,8 @@
         </form>
         
     </div>
-    
+    </br>
+    </br>
 </section>
 
 @endsection
