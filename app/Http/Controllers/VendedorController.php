@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Vendedor;
+use App\Models\Compra;
 use Exception;
 
 class VendedorController extends Controller
@@ -99,15 +100,21 @@ class VendedorController extends Controller
      * @return null | redireciona a pagina
      */
     public function delete(Request $request) {
-
         $cod = $request->query('cod');
+        $compra = Compra::where("codVendedor", $cod)->first();
+        
+        if($compra) {
+            return redirect('/cadastrarvendedor')->with('msg', 'Falha ao deletar vendedor!');
+        }
 
         $vendedor = Vendedor::where("codigo_vendedor", $cod)->first();
         $controller = new EnderecoController;
         $controller->delete($vendedor->cpf);
 
         $this->destroy($cod);
+
         return redirect('/cadastrarvendedor')->with('msg', 'Vendedor deletado com sucesso!');
+
     }
 
     /**
